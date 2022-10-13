@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/02-javaweb/experiments/javaee-exp03-blog-serve" />
+    <file type="web" url="file://$PROJECT_DIR$/02-javaweb/week02" />
+    <file type="web" url="file://$PROJECT_DIR$/02-javaweb/week04" />
+    <file type="web" url="file://$PROJECT_DIR$/02-javaweb/week05" />
+    <file type="web" url="file://$PROJECT_DIR$/02-javaweb/week06" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/02-javaweb/week02/pom.xml" />
+        <option value="$PROJECT_DIR$/02-javaweb/week04/pom.xml" />
+        <option value="$PROJECT_DIR$/02-javaweb/week05/pom.xml" />
+        <option value="$PROJECT_DIR$/02-javaweb/week06/pom.xml" />
+        <option value="$PROJECT_DIR$/02-javaweb/experiments/javaee-exp03-blog-serve/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" default="true" project-jdk-name="18" project-jdk-type="JavaSDK" />
+</project>
