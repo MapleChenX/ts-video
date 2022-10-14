@@ -1,7 +1,9 @@
 package utils;
 
+import annotations.DatabaseConfig;
 import annotations.Table;
 import com.alibaba.fastjson2.JSON;
+import configs.MySQLConfig;
 import lombok.Getter;
 
 import java.lang.reflect.Field;
@@ -21,9 +23,7 @@ import java.util.List;
 @Getter
 public class JdbcOperation<T> {
 
-  private final String url;
-  private final String user;
-  private final String password;
+  private MySQLConfig config;
   private Connection connection;
   private PreparedStatement preparedStatement;
   private ResultSet resultSet;
@@ -32,7 +32,7 @@ public class JdbcOperation<T> {
   private final Field[] objectFields;
   private final ArrayList<String> tableFieldsName = new ArrayList<>();
   private final ArrayList<Object> tableFieldsValue = new ArrayList<>();
-  private final Class<?> clz;
+  private final Class<?> entityClz;
 
   static {
     try {
@@ -42,13 +42,20 @@ public class JdbcOperation<T> {
     }
   }
 
-  public JdbcOperation(String url, String user, String password, Class<?> clz) {
-    this.url = url;
-    this.user = user;
-    this.password = password;
-    this.clz = clz;
-    tableName = clz.getAnnotation(Table.class).name();
-    objectFields = clz.getDeclaredFields();
+  public JdbcOperation(Class<?> configClz, Class<?> entityClz) {
+    this.entityClz = entityClz;
+    tableName = entityClz.getAnnotation(Table.class).name();
+    objectFields = entityClz.getDeclaredFields();
+    try {
+      config = (MySQLConfig) configClz.getDeclaredConstructor().newInstance();
+      Field[] configFields = configClz.getDeclaredFields();
+      for (Field configField : configFields) {
+        configField.setAccessible(true);
+        configField.set(config, configField.getAnnotation(DatabaseConfig.class).value());
+      }
+    } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public JdbcOperation<T> load(T entity) {
@@ -66,7 +73,7 @@ public class JdbcOperation<T> {
       }
     }
     try {
-      connection = DriverManager.getConnection(url, user, password);
+      connection = DriverManager.getConnection(config.getUrl(), config.getUsername(), config.getPassword());
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -175,12 +182,14 @@ public class JdbcOperation<T> {
     }
     try {
       while (resultSet.next()) {
-        T rebirth = (T) clz.getDeclaredConstructor().newInstance();
+        T rebirth = (T) entityClz.getDeclaredConstructor().newInstance();
         for (Field objField : objectFields) {
           if (objField.getType().getName().equals(String.class.getName())) {
             objField.set(rebirth, resultSet.getString(objField.getAnnotation(annotations.Field.class).value()));
           } else if (objField.getType().getName().equals(int.class.getName())) {
             objField.set(rebirth, resultSet.getInt(objField.getAnnotation(annotations.Field.class).value()));
+          } else if (objField.getType().getName().equals(java.util.Date.class.getName())) {
+            objField.set(rebirth, resultSet.getDate(objField.getAnnotation(annotations.Field.class).value()));
           }
         }
         list.add(rebirth);
@@ -200,7 +209,6 @@ public class JdbcOperation<T> {
    * @param type executeUpdate：true；executeQuery：false
    */
   private void execute(String sql, boolean type) {
-    System.out.println(sql);
     try {
       preparedStatement = connection.prepareStatement(sql);
       if (type) executedCode = preparedStatement.executeUpdate();

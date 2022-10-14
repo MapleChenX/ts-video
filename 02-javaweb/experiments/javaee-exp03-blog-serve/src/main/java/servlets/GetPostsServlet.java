@@ -1,8 +1,9 @@
 package servlets;
 
 import configs.MySQLConfig;
-import entities.User;
+import entities.Post;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +12,10 @@ import utils.JdbcOperation;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/login"})
-public class LoginServlet extends HttpServlet {
-  private static final JdbcOperation<User> op = new JdbcOperation<>(MySQLConfig.class, User.class);
+@WebServlet(urlPatterns = {"/get/posts"})
+public class GetPostsServlet extends HttpServlet {
+
+  private static final JdbcOperation<Post> op = new JdbcOperation<>(MySQLConfig.class, Post.class);
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,5 +24,7 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    resp.setContentType("application/json");
+    resp.getWriter().write(op.load(new Post()).select(true, null).getJson());
   }
 }

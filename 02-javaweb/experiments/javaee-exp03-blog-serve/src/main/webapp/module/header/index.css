@@ -1,0 +1,24 @@
+.header {
+  height: 8vh;
+  width: 100%;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin-bottom: 1vh;
+  background-color: var(--card-bg-color);
+}
+
+.header .left {
+  font-size: 22px;
+}
+
+.header .right li {
+  margin: 0 10px;
+}
+
+.header .right li:first-child {
+  margin: 0 10px 0 0;
+}
+
+.header .right li:last-child {
+  margin: 0 0 0 10px;
+}
