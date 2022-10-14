@@ -1,0 +1,10 @@
+.container {
+  width: 65vw;
+  height: 100vh;
+}
+
+.content {
+  width: 100%;
+  box-sizing: border-box;
+  height: calc(100vh - 9vh);
+}

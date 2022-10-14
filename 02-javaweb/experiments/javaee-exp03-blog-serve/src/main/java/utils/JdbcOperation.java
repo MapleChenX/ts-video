@@ -189,7 +189,7 @@ public class JdbcOperation<T> {
           } else if (objField.getType().getName().equals(int.class.getName())) {
             objField.set(rebirth, resultSet.getInt(objField.getAnnotation(annotations.Field.class).value()));
           } else if (objField.getType().getName().equals(java.util.Date.class.getName())) {
-            objField.set(rebirth, resultSet.getDate(objField.getAnnotation(annotations.Field.class).value()));
+            objField.set(rebirth, resultSet.getTimestamp(objField.getAnnotation(annotations.Field.class).value()));
           }
         }
         list.add(rebirth);
