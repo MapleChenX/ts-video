@@ -1,5 +1,5 @@
-<div class="left-side radius hide-scroll">
-  <div class="content hide-scroll">
+<template>
+  <div class="left-side hide-scroll">
     <img class="avatar cover radius" src="https://images-1303923190.cos.ap-chengdu.myqcloud.com/o_220930010815_90347759_p0.jpg" />
     <div class="info pad-b-15 border-b-dotted mar-t-10 size-13 flex justify-between align-center items-center">
       <div class="year">
@@ -40,4 +40,18 @@
       </ul>
     </div>
   </div>
-</div>
+</template>
+<script></script>
+<style scoped>
+.left-side {
+  background-color: var(--card-bg-color);
+  width: 12.5vw;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.left-side .avatar {
+  width: 100%;
+  height: calc(12.5vw - 30px);
+}
+</style>
