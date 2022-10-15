@@ -29,7 +29,7 @@ const { data } = await service.post(`/get/post?id=${route.query.id}`);
 let post = ref(data[0]);
 
 function editPost() {
-  router.push({ path: "/edit", query: { id: route.query.id } });
+  router.push({ path: "/h/edit", query: { id: route.query.id } });
 }
 </script>
 

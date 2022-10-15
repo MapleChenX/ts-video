@@ -6,6 +6,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+/**
+ * Servlet 拦截器，拦截所有 URL，解决跨域问题。
+ *
+ * @author zhengrenfu
+ * @version 1.0
+ * @since 1.5
+ */
 @WebFilter(filterName = "CrossOriginFilter", urlPatterns = "/*")
 public class CrossOriginFilter implements Filter {
   @Override

@@ -4,8 +4,8 @@
     <ul class="right flex row">
       <li class="item"><router-link to="/">首页</router-link></li>
       <li class="item"><router-link to="/">标签</router-link></li>
-      <li class="item"><router-link to="/new/post">新随笔</router-link></li>
-      <li class="item"><router-link to="/manage/post">管理</router-link></li>
+      <li class="item"><router-link to="/h/new/post">新随笔</router-link></li>
+      <li class="item"><router-link to="/h/manage/post">管理</router-link></li>
     </ul>
   </div>
 </template>

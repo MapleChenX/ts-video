@@ -5,28 +5,40 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      redirect: "/h"
+    },
+    {
+      path: "/h",
       name: "home",
-      component: () => import("@/views/Home.vue")
-    },
-    {
-      path: "/post",
-      name: "post",
-      component: () => import("@/views/Post.vue")
-    },
-    {
-      path: "/edit",
-      name: "edit",
-      component: () => import("@/views/Edit.vue")
-    },
-    {
-      path: "/new/post",
-      name: "newPost",
-      component: () => import("@/views/NewPost.vue")
-    },
-    {
-      path: "/manage/post",
-      name: "managePost",
-      component: () => import("@/views/ManagePost.vue")
+      redirect: "/h/posts",
+      component: () => import("@/views/Home.vue"),
+      children: [
+        {
+          path: "posts",
+          name: "posts",
+          component: () => import("@/views/Posts.vue")
+        },
+        {
+          path: "post",
+          name: "post",
+          component: () => import("@/views/Post.vue")
+        },
+        {
+          path: "edit",
+          name: "edit",
+          component: () => import("@/views/Edit.vue")
+        },
+        {
+          path: "new/post",
+          name: "newPost",
+          component: () => import("@/views/NewPost.vue")
+        },
+        {
+          path: "manage/post",
+          name: "managePost",
+          component: () => import("@/views/ManagePost.vue")
+        }
+      ]
     }
   ]
 });

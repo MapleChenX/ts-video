@@ -1,7 +1,12 @@
 import axios from "axios";
 
+const service = axios.create({
+  baseURL: "http://localhost:8080/blog-serve",
+  timeout: 1000
+});
+
 // Add a request interceptor
-axios.interceptors.request.use(
+service.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     return config;
@@ -13,7 +18,7 @@ axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+service.interceptors.response.use(
   function (response) {
     // Do something with response data
     return response;
@@ -23,10 +28,5 @@ axios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-const service = axios.create({
-  baseURL: "http://localhost:8080/blog-serve",
-  timeout: 1000
-});
 
 export default service;

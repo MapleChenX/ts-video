@@ -37,7 +37,7 @@ let centerDialogVisible = ref(false);
 let dialogTitle = ref("");
 
 function handleEdit(index, row) {
-  router.push({ path: "/edit", query: { id: row.id } });
+  router.push({ path: "/h/edit", query: { id: row.id } });
 }
 
 let post = ref();

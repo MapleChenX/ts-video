@@ -1,21 +1,12 @@
-<script setup>
-import { RouterView } from "vue-router";
-import BlogHeader from "@/components/BlogHeader.vue";
-import LeftSide from "@/components/LeftSide.vue";
-import RightSide from "@/components/RightSide.vue";
-</script>
+<script setup></script>
 
 <template>
   <Suspense>
     <div class="app flex col items-center">
-      <div class="container">
+      <div class="container hide-scroll">
         <BlogHeader />
-        <div class="content flex justify-between">
-          <LeftSide />
-          <div class="views hide-scroll">
-            <RouterView />
-          </div>
-          <RightSide />
+        <div class="content hide-scroll">
+          <RouterView />
         </div>
       </div>
     </div>
@@ -37,11 +28,5 @@ import RightSide from "@/components/RightSide.vue";
 .content {
   width: 100%;
   height: 91vh;
-}
-
-.views {
-  box-sizing: border-box;
-  background-color: var(--card-bg-color);
-  width: 39vw;
 }
 </style>

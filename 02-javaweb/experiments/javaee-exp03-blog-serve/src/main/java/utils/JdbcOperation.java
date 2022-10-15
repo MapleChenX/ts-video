@@ -3,6 +3,8 @@ package utils;
 import annotations.DatabaseConfig;
 import annotations.Table;
 import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import configs.MySQLConfig;
 import lombok.Getter;
 
@@ -11,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,7 @@ public class JdbcOperation<T> {
   private final ArrayList<String> tableFieldsName = new ArrayList<>();
   private final ArrayList<Object> tableFieldsValue = new ArrayList<>();
   private final Class<?> entityClz;
+  private List<T> list;
 
   static {
     try {
@@ -177,14 +181,8 @@ public class JdbcOperation<T> {
     return this;
   }
 
-  public String getJson() {
-    String json = JSON.toJSONString(getObject());
-    close();
-    return json;
-  }
-
   public List<T> getObject() {
-    List<T> list = new ArrayList<>();
+    list = new ArrayList<>();
     if (resultSet == null) try {
       throw new Exception("ResultSet 为空。数据查询是否成功或 select() 函数是否被使用？");
     } catch (Exception e) {
@@ -208,8 +206,15 @@ public class JdbcOperation<T> {
              InvocationTargetException e) {
       throw new RuntimeException(e);
     }
-    close();
     return list;
+  }
+
+  public String getJson() {
+    return JSON.toJSONString(list);
+  }
+
+  public JSONArray getJsonArray() {
+    return JSON.parseArray(JSON.toJSONString(list));
   }
 
   /**
@@ -222,7 +227,10 @@ public class JdbcOperation<T> {
     try {
       preparedStatement = connection.prepareStatement(sql);
       if (type) executedCode = preparedStatement.executeUpdate();
-      else resultSet = preparedStatement.executeQuery();
+      else {
+        resultSet = preparedStatement.executeQuery();
+        getObject();
+      }
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
