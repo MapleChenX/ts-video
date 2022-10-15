@@ -9,7 +9,9 @@ import lombok.Getter;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
 @Getter
 public class JdbcOperation<T> {
 
-  private MySQLConfig config;
+  private final MySQLConfig config;
   private Connection connection;
   private PreparedStatement preparedStatement;
   private ResultSet resultSet;
@@ -58,6 +60,10 @@ public class JdbcOperation<T> {
     }
   }
 
+  private String formatDateTime(java.util.Date data) {
+    return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(data);
+  }
+
   public JdbcOperation<T> load(T entity) {
     tableFieldsName.clear();
     tableFieldsValue.clear();
@@ -66,7 +72,11 @@ public class JdbcOperation<T> {
       try {
         if (objField.get(entity) != null) {
           tableFieldsName.add(objField.getAnnotation(annotations.Field.class).value());
-          tableFieldsValue.add(objField.get(entity));
+          if (objField.getType().getName().equals(java.util.Date.class.getName())) {
+            tableFieldsValue.add(DateTimeFormatter.format((Date) objField.get(entity)));
+          } else {
+            tableFieldsValue.add(objField.get(entity));
+          }
         }
       } catch (IllegalAccessException e) {
         throw new RuntimeException(e);
@@ -83,8 +93,8 @@ public class JdbcOperation<T> {
   public JdbcOperation<T> insert() {
     StringBuilder sql = new StringBuilder();
     sql.append("insert into ").append(tableName).append("(");
-    for (String tableField : tableFieldsName) { // 1
-      sql.append(tableField).append(",");
+    for (String tableFieldName : tableFieldsName) { // 1
+      sql.append("`" + tableFieldName + "`").append(",");
     }
     sql.deleteCharAt(sql.length() - 1);
     sql.append(") values(");
@@ -132,7 +142,7 @@ public class JdbcOperation<T> {
         idFieldIndex = index;
         isIdField = true;
       } else {
-        sql.append(tableFieldsName.get(index)).append("='").append(tableFieldsValue.get(index)).append("',");
+        sql.append("`" + tableFieldsName.get(index) + "`").append("='").append(tableFieldsValue.get(index)).append("',");
       }
     }
     if (!isIdField) {

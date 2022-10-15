@@ -21,7 +21,7 @@ public class CrossOriginFilter implements Filter {
     // 允许跨域的主机地址
     response.setHeader("Access-Control-Allow-Origin", "*");
     // 允许跨域的请求方法 GET、POST、HEAD 等
-    response.setHeader("Access-Control-Allow-Methods", "*·");
+    response.setHeader("Access-Control-Allow-Methods", "*");
     // 重新预检验跨域的缓存时间 (s)
     response.setHeader("Access-Control-Max-Age", "3600");
     // 允许跨域的请求头

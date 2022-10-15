@@ -1,5 +1,5 @@
 {
-  "name": "blog-client",
+  "name": "exp03-blog-client",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -7,7 +7,9 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "@bytemd/vue-next": "^1.17.2",
     "axios": "^1.1.2",
+    "element-plus": "^2.2.18",
     "jquery": "^3.6.1",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",
@@ -15,6 +17,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.3",
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-vue-components": "^0.22.8",
     "vite": "^3.0.9"
   }
 }

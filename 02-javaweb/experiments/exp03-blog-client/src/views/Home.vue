@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import service from "../request";
+import service from "@/request";
 
 const { data } = await service.post("/get/posts");
 </script>

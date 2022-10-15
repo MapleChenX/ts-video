@@ -1,8 +1,8 @@
 <script setup>
 import { RouterView } from "vue-router";
-import BlogHeader from "./components/BlogHeader.vue";
-import LeftSide from "./components/LeftSide.vue";
-import RightSide from "./components/RightSide.vue";
+import BlogHeader from "@/components/BlogHeader.vue";
+import LeftSide from "@/components/LeftSide.vue";
+import RightSide from "@/components/RightSide.vue";
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import RightSide from "./components/RightSide.vue";
         <BlogHeader />
         <div class="content flex justify-between">
           <LeftSide />
-          <div class="views">
+          <div class="views hide-scroll">
             <RouterView />
           </div>
           <RightSide />

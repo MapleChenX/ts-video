@@ -10,7 +10,7 @@ import utils.JdbcOperation;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/get/posts"})
+@WebServlet(name = "GetPosts", urlPatterns = {"/get/posts"})
 public class GetPostsServlet extends HttpServlet {
   private static final JdbcOperation<Post> op = new JdbcOperation<>(MySQLConfig.class, Post.class);
 
