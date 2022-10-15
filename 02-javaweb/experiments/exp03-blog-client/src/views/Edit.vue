@@ -25,14 +25,14 @@
 <script setup>
 import { ref } from "vue";
 import service from "@/request";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { Editor } from "@bytemd/vue-next";
+import { ElMessageBox, ElMessage } from "element-plus";
 
 const route = useRoute();
-let id = route.query.id;
+const router = useRouter();
 
-const { data } = await service.post(`/get/post?id=${id}`);
-
+let { data } = await service.post(`/get/post?id=${route.query.id}`);
 let post = ref(data[0]);
 
 function handleChange(newValue) {
@@ -40,7 +40,28 @@ function handleChange(newValue) {
 }
 
 function submit() {
-  service.post(`/update/post`, post.value);
+  ElMessageBox.confirm("确定更新该文章？", "提示", {
+    cancelButtonText: "取消",
+    confirmButtonText: "确定"
+  })
+    .then(() => {
+      service.post(`/update/post`, post.value);
+      ElMessage({
+        center: true,
+        message: `更新成功！`,
+        type: "success"
+      });
+      setTimeout(() => {
+        router.push("/");
+      }, 500);
+    })
+    .catch(() => {
+      ElMessage({
+        center: true,
+        message: `更新失败！`,
+        type: "error"
+      });
+    });
 }
 </script>
 

@@ -18,8 +18,12 @@
 <script setup>
 import { ref } from "vue";
 import service from "@/request";
+import { useRouter } from "vue-router";
+import { ElMessageBox, ElMessage } from "element-plus";
 import { Editor } from "@bytemd/vue-next";
 import Post from "@/entities/post.js";
+
+const router = useRouter();
 
 let post = ref(new Post());
 
@@ -28,7 +32,28 @@ function handleChange(newValue) {
 }
 
 function submit() {
-  service.post(`/insert/post`, post.value);
+  ElMessageBox.confirm("确定发表该文章？", "提示", {
+    cancelButtonText: "取消",
+    confirmButtonText: "确定"
+  })
+    .then(() => {
+      service.post(`/insert/post`, post.value);
+      ElMessage({
+        center: true,
+        message: `发表成功！`,
+        type: "success"
+      });
+      setTimeout(() => {
+        router.push("/");
+      }, 500);
+    })
+    .catch(() => {
+      ElMessage({
+        center: true,
+        message: `发表失败！`,
+        type: "error"
+      });
+    });
 }
 </script>
 

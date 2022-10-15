@@ -10,6 +10,7 @@ import "@/assets/css/common.css";
 import "@/assets/css/layout.css";
 import "@/assets/css/theme.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
+import "element-plus/dist/index.css";
 
 const app = createApp(App);
 app.use(router);

@@ -114,7 +114,7 @@ public class JdbcOperation<T> {
     boolean isIdField = false;
     for (int index = 0; index < tableFieldsName.size(); index++) {
       if (tableFieldsName.get(index).equals("id")) {
-        sql.append(tableFieldsName.get(index)).append("=");
+        sql.append("`" + tableFieldsName.get(index) + "`").append("=");
         idFieldIndex = index;
         isIdField = true;
       }

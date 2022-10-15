@@ -3,16 +3,16 @@
     <img class="avatar cover radius" src="https://images-1303923190.cos.ap-chengdu.myqcloud.com/o_220930010815_90347759_p0.jpg" />
     <div class="info pad-b-15 border-b-dotted mar-t-10 size-13 flex justify-between align-center items-center">
       <div class="year">
-        <div class="num">21个月</div>
-        <div>园龄</div>
+        <div class="num text-center">21个月</div>
+        <div class="text-center">园龄</div>
       </div>
       <div class="fans">
-        <div class="num">14</div>
-        <div>粉丝</div>
+        <div class="num text-center">14</div>
+        <div class="text-center">粉丝</div>
       </div>
       <div class="follows">
-        <div class="num">9</div>
-        <div>关注</div>
+        <div class="num text-center">9</div>
+        <div class="text-center">关注</div>
       </div>
     </div>
     <div class="tag-list">
