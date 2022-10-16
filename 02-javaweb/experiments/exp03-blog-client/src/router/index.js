@@ -55,10 +55,14 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   let cookie = useCookies().get("signed");
-  if (!cookie && to.name !== "login") {
-    next({ name: "login" });
-  } else {
+  if (to.name === "register") {
     next();
+  } else {
+    if (!cookie && to.name !== "login") {
+      next({ name: "login" });
+    } else {
+      next();
+    }
   }
 });
 

@@ -224,6 +224,7 @@ public class JdbcOperation<T> {
    * @param type executeUpdate：true；executeQuery：false
    */
   private void execute(String sql, boolean type) {
+    System.out.println(sql);
     try {
       preparedStatement = connection.prepareStatement(sql);
       if (type) executedCode = preparedStatement.executeUpdate();

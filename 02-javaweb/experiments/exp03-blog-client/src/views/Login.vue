@@ -59,7 +59,7 @@ function handleLogin() {
 }
 
 function handleRegister() {
-  console.log(radio.value);
+  router.push("/register");
 }
 </script>
 
