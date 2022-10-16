@@ -2,7 +2,7 @@
   <div class="right-side hide-scroll pad-all-15">
     <div>
       <h3 class="tip-title" style="margin-top: 0 !important">常用链接</h3>
-      <ul class="links-wrap ul li-mar-tb-10 li-mar-tb-10-simp">
+      <ul class="links-wrap size-15 ul li-mar-tb-10 li-mar-tb-10-simp">
         <li class="links item-0">
           <a href="http://www.cyc2018.xyz/" target="_blank"> CS-Notes </a>
         </li>

@@ -23,7 +23,7 @@
     </div>
     <div class="tag-list">
       <h3 class="tip-title">我的标签</h3>
-      <ul class="ul li-mar-tb-10 li-mar-tb-10-simp">
+      <ul class="size-15 ul li-mar-tb-10 li-mar-tb-10-simp">
         <li>英语</li>
         <li>Excel</li>
         <li>Linux</li>
@@ -35,7 +35,7 @@
     </div>
     <div class="post-list">
       <h3 class="tip-title">随笔分类</h3>
-      <ul class="ul li-mar-tb-10 li-mar-tb-10-simp">
+      <ul class="size-15 ul li-mar-tb-10 li-mar-tb-10-simp">
         <li>计算机网络</li>
         <li>计算机基础</li>
         <li>嵌入式系统开发</li>
