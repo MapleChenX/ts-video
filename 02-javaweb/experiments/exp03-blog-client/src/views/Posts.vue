@@ -13,7 +13,7 @@
             <router-link :to="{ path: '/h/post', query: { id: item.id } }"> 阅读全文>> </router-link>
           </div>
           <div class="post-info flex justify-end size-13">
-            <div class="post-date mar-r-10">发表于@{{ item.postDate }}</div>
+            <div class="post-date mar-r-10">发表于@{{ item.createDate }}</div>
             <div class="post-thumbs mar-r-10">点赞({{ item.thumbs }})</div>
             <div class="post-views">阅读({{ item.views }})</div>
           </div>

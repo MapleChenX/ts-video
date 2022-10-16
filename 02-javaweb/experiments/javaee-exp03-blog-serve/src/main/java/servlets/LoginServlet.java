@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     resp.setContentType("application/json");
     int expire = Integer.parseInt(req.getParameter("expire"));
     User body = (User) ParseReqBody.get(req, User.class);
-    op.load(body).select(true, "username = '" + body.getUsername() + "' and password = '" + body.getPassword() + "'");
+    op.load(body).select(true, "username = '" + body.getUsername() + "' and password = '" + body.getPassword() + "'", null);
     List<User> users = op.getList();
     if (!users.isEmpty()) {
       User user = users.get(0);

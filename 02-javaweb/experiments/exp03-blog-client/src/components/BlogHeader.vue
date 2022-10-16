@@ -8,6 +8,9 @@
         <router-link class="flex align-center items-center justify-center" to="/h/posts">首页</router-link>
       </li>
       <li class="item flex align-center items-center justify-center">
+        <router-link class="flex align-center items-center justify-center" to="/h/square">广场</router-link>
+      </li>
+      <li class="item flex align-center items-center justify-center">
         <router-link class="flex align-center items-center justify-center" to="/h/posts">标签</router-link>
       </li>
       <li class="item flex align-center items-center justify-center">

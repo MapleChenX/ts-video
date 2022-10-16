@@ -162,7 +162,7 @@ public class JdbcOperation<T> {
     return this;
   }
 
-  public JdbcOperation<T> select(boolean isAll, String where) {
+  public JdbcOperation<T> select(boolean isAll, String where, String order) {
     StringBuilder sql = new StringBuilder();
     if (isAll) {
       sql.append("select * from ").append(tableName);
@@ -176,6 +176,9 @@ public class JdbcOperation<T> {
     }
     if (where != null) {
       sql.append(" where ").append(where);
+    }
+    if (order != null) {
+      sql.append(" ").append(order);
     }
     execute(String.valueOf(sql), false);
     return this;
@@ -224,7 +227,6 @@ public class JdbcOperation<T> {
    * @param type executeUpdate：true；executeQuery：false
    */
   private void execute(String sql, boolean type) {
-    System.out.println(sql);
     try {
       preparedStatement = connection.prepareStatement(sql);
       if (type) executedCode = preparedStatement.executeUpdate();

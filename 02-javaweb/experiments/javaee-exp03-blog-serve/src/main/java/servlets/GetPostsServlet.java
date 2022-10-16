@@ -25,7 +25,7 @@ public class GetPostsServlet extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     resp.setContentType("application/json");
     User user = (User) ParseReqBody.get(req, User.class);
-    resp.getWriter().write(op.load(new Post()).select(true, "user_id = " + user.getId()).getJson());
+    resp.getWriter().write(op.load(new Post()).select(true, "user_id = " + user.getId(), "order by create_date desc").getJson());
     op.close();
   }
 }

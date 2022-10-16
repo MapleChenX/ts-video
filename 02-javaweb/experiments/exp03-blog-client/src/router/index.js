@@ -47,6 +47,11 @@ const router = createRouter({
           path: "manage/post",
           name: "managePost",
           component: () => import("@/views/ManagePost.vue")
+        },
+        {
+          path: "square",
+          name: "square",
+          component: () => import("@/views/Square.vue")
         }
       ]
     }

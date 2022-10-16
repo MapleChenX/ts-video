@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     resp.setContentType("application/json");
     User body = (User) ParseReqBody.get(req, User.class);
-    op.load(body).select(true, "username = '" + body.getUsername() + "'");
+    op.load(body).select(true, "username = '" + body.getUsername() + "'", null);
     List<User> users = op.getList();
     if (users.isEmpty()) {
       body.setCreateDate(new Date());

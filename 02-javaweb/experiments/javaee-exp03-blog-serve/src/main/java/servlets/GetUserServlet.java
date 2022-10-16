@@ -26,7 +26,7 @@ public class GetUserServlet extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     resp.setContentType("application/json");
     User body = (User) ParseReqBody.get(req, User.class);
-    resp.getWriter().write(op.load(body).select(true, "id = " + body.getId()).getJson());
+    resp.getWriter().write(op.load(body).select(true, "id = " + body.getId(), null).getJson());
     op.close();
   }
 }
