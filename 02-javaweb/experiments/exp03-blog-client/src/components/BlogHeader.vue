@@ -3,17 +3,32 @@
     <div class="left">
       <a href="https://www.cnblogs.com/Enziandom/">{{ user.showName }}</a>
     </div>
-    <ul class="right flex row">
-      <li class="item"><router-link to="/">首页</router-link></li>
-      <li class="item"><router-link to="/">标签</router-link></li>
-      <li class="item"><router-link to="/h/new/post">新随笔</router-link></li>
-      <li class="item"><router-link to="/h/manage/post">管理</router-link></li>
+    <ul class="right flex row align-center items-center justify-center">
+      <li class="item flex align-center items-center justify-center">
+        <router-link class="flex align-center items-center justify-center" to="/h/posts">首页</router-link>
+      </li>
+      <li class="item flex align-center items-center justify-center">
+        <router-link class="flex align-center items-center justify-center" to="/h/posts">标签</router-link>
+      </li>
+      <li class="item flex align-center items-center justify-center">
+        <router-link class="flex align-center items-center justify-center" to="/h/new/post">新随笔</router-link>
+      </li>
+      <li class="item flex align-center items-center justify-center">
+        <router-link class="flex align-center items-center justify-center" to="/h/manage/post">管理</router-link>
+      </li>
+      <li class="item"><el-button @click="quit" size="small">注销</el-button></li>
     </ul>
   </div>
 </template>
 
 <script setup>
 import { defineProps } from "vue";
+import { useRouter } from "vue-router";
+import { useCookies } from "@vueuse/integrations/useCookies";
+import { ElMessage } from "element-plus";
+
+const router = useRouter();
+const { remove } = useCookies();
 
 const props = defineProps({
   user: {
@@ -21,6 +36,18 @@ const props = defineProps({
     required: true
   }
 });
+
+function quit() {
+  remove("signed", { domain: "localhost", path: "/" });
+  setTimeout(() => {
+    router.push("/login");
+    ElMessage({
+      center: true,
+      message: "注销成功",
+      type: "success"
+    });
+  }, 500);
+}
 </script>
 
 <style scoped>

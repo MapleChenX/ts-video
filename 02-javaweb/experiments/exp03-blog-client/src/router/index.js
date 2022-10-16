@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      redirect: "/h"
+      path: "/"
     },
     {
       path: "/login",
@@ -51,6 +51,15 @@ const router = createRouter({
       ]
     }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  let cookie = useCookies().get("signed");
+  if (!cookie && to.name !== "login") {
+    next({ name: "login" });
+  } else {
+    next();
+  }
 });
 
 export default router;

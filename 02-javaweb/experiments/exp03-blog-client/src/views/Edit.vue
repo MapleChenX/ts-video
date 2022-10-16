@@ -52,7 +52,7 @@ function submit() {
         type: "success"
       });
       setTimeout(() => {
-        router.push("/");
+        router.push("/h/posts");
       }, 500);
     })
     .catch(() => {

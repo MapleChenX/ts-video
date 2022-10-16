@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     resp.setContentType("application/json");
+    int expire = Integer.parseInt(req.getParameter("expire"));
     User body = (User) ParseReqBody.get(req, User.class);
     op.load(body).select(true, "username = '" + body.getUsername() + "' and password = '" + body.getPassword() + "'");
     List<User> users = op.getList();
@@ -33,7 +34,7 @@ public class LoginServlet extends HttpServlet {
       User user = users.get(0);
       Cookie cookie = new Cookie("signed", String.valueOf(user.getId()));
       cookie.setPath("/");
-      cookie.setMaxAge(3600 * 24 * 7);
+      cookie.setMaxAge(3600 * 24 * expire);
       resp.addCookie(cookie);
     }
     resp.getWriter().write(op.getJson());

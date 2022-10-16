@@ -3,12 +3,18 @@
     <div class="container radius">
       <div class="title text-center">登录博客</div>
       <div class="item flex align-center justify-between items-center">
-        <div class="label flex align-center justify-center items-center">账号：</div>
+        <div class="label flex align-center justify-start items-center">账号：</div>
         <el-input v-model="user.username" placeholder="请输入账号"></el-input>
       </div>
       <div class="item flex align-center justify-between items-center">
-        <div class="label flex align-center justify-center items-center">密码：</div>
+        <div class="label flex align-center justify-start items-center">密码：</div>
         <el-input v-model="user.password" type="password" placeholder="请输入密码"></el-input>
+      </div>
+      <div class="item flex align-center justify-between items-center">
+        <el-radio-group v-model="radio">
+          <el-radio label="1" size="small">1天免登录</el-radio>
+          <el-radio label="7" size="small">7天免登录</el-radio>
+        </el-radio-group>
       </div>
       <div class="item btns flex align-center justify-between items-center">
         <el-button @click="handleLogin" type="primary">登录</el-button>
@@ -28,10 +34,11 @@ import User from "@/entities/user";
 
 const router = useRouter();
 let user = ref(new User());
+let radio = ref("1");
 
 function handleLogin() {
   service
-    .post("/login", user.value, {
+    .post(`/login?expire=${radio.value}`, user.value, {
       withCredentials: true
     })
     .then(res => {
@@ -51,7 +58,9 @@ function handleLogin() {
     .catch(err => {});
 }
 
-function handleRegister() {}
+function handleRegister() {
+  console.log(radio.value);
+}
 </script>
 
 <style scoped>
@@ -80,7 +89,7 @@ function handleRegister() {}
 .container {
   padding: 4vh 4vw;
   width: 30vw;
-  height: 45vh;
+  height: 50vh;
   box-sizing: border-box;
   background-color: var(--card-bg-color);
 }

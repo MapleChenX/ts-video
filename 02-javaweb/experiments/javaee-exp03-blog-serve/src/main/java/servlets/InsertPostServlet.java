@@ -28,9 +28,6 @@ public class InsertPostServlet extends HttpServlet {
     Post post = (Post) ParseReqBody.get(req, Post.class);
     post.setPostDate(new Date());
     post.setCreateDate(new Date());
-    post.setThumbs(0);
-    post.setViews(0);
-    post.setUserId(10000);
     op.load(post).insert();
     op.close();
   }

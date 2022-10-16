@@ -22,10 +22,12 @@ import { useRouter } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
 import { Editor } from "@bytemd/vue-next";
 import Post from "@/entities/post.js";
+import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = useRouter();
 
 let post = ref(new Post());
+post.value.userId = useCookies().get("signed");
 
 function handleChange(newValue) {
   post.value.content = newValue;
@@ -44,7 +46,7 @@ function submit() {
         type: "success"
       });
       setTimeout(() => {
-        router.push("/");
+        router.push("/h/posts");
       }, 500);
     })
     .catch(() => {

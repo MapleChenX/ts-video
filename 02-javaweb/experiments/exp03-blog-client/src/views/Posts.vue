@@ -25,8 +25,8 @@
             <div class="size-19 mar-b-10">你没有发表任何一篇文章</div>
             <div class="size-19 mar-b-10">赶紧去发表一篇吧！</div>
             <div class="size-15 mar-b-10"><router-link to="/h/new/post">👉发表文章</router-link></div>
-            <div class="size-12 tips mar-b-5">Blog System was Powered By ZhengRenFu</div>
-            <div class="size-12 tips">Here is Blog System Source <a href="https://github.com/Enziandom/java-learning/tree/main/02-javaweb/experiments">GitHub</a></div>
+            <div class="size-12 tips mar-b-5">The Blog System was Powered By ZhengRenFu</div>
+            <div class="size-12 tips">Here was Blog System Source At <a href="https://github.com/Enziandom/java-learning/tree/main/02-javaweb/experiments">GitHub</a></div>
           </div>
         </div>
       </template>
