@@ -5,7 +5,9 @@
       <div class="post-date mar-r-10">发表时间：{{ post.createDate }}</div>
       <div class="views mar-r-10">阅读：{{ post.views }}</div>
       <div class="thumbs mar-r-10">点赞：{{ post.thumbs }}</div>
-      <el-button size="small" @click="editPost" type="primary" :icon="Edit" circle plain />
+      <template v-if="post.userId === id">
+        <el-button size="small" @click="editPost" type="primary" :icon="Edit" circle plain />
+      </template>
     </div>
     <div class="content">{{ post.content }}</div>
     <div class="footer">
@@ -21,7 +23,9 @@ import { ref } from "vue";
 import { Edit } from "@element-plus/icons-vue";
 import service from "@/request";
 import { useRoute, useRouter } from "vue-router";
+import { useCookies } from "@vueuse/integrations/useCookies";
 
+const id = useCookies().get("signed");
 const route = useRoute();
 const router = useRouter();
 

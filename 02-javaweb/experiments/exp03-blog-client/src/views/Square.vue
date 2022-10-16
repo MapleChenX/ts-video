@@ -4,6 +4,7 @@
       <div class="post-title mar-b-10 size-18">
         <router-link :to="{ path: '/h/post', query: { id: item.id } }">
           {{ item.title }}
+          <el-tag v-if="item.userId === id">我的</el-tag>
         </router-link>
       </div>
       <div class="post-desc size-14">{{ item.desc }}</div>
@@ -21,6 +22,9 @@
 
 <script setup>
 import service from "@/request";
+import { useCookies } from "@vueuse/integrations/useCookies";
+
+const id = useCookies().get("signed");
 
 const { data } = await service.post("/get/all/posts");
 </script>
