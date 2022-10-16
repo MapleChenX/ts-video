@@ -29,5 +29,6 @@ public class UpdatePostServlet extends HttpServlet {
     Post post = (Post) ParseReqBody.get(req, Post.class);
     post.setPostDate(new Date());
     op.load(post).update();
+    op.close();
   }
 }

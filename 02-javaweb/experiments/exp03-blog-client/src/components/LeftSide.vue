@@ -1,19 +1,22 @@
 <template>
   <div class="left-side hide-scroll">
-    <img class="avatar cover radius" src="https://images-1303923190.cos.ap-chengdu.myqcloud.com/o_220930010815_90347759_p0.jpg" />
+    <img class="avatar cover radius" :src="user.avatar" />
     <div class="info pad-b-15 border-b-dotted mar-t-10 size-13 flex justify-between align-center items-center">
       <div class="year">
-        <div class="num text-center">21个月</div>
+        <div class="num text-center">{{ calcBlogAge(user.createDate).days }}天</div>
         <div class="text-center">园龄</div>
       </div>
       <div class="fans">
-        <div class="num text-center">14</div>
+        <div class="num text-center">{{ user.fans }}</div>
         <div class="text-center">粉丝</div>
       </div>
       <div class="follows">
-        <div class="num text-center">9</div>
+        <div class="num text-center">{{ user.follows }}</div>
         <div class="text-center">关注</div>
       </div>
+    </div>
+    <div class="signature pad-tb-15 border-b-dotted text-center size-13">
+      {{ user.signature }}
     </div>
     <div class="tag-list">
       <h3 class="tip-title">我的标签</h3>
@@ -41,7 +44,19 @@
     </div>
   </div>
 </template>
-<script></script>
+
+<script setup>
+import { defineProps } from "vue";
+import { calcBlogAge } from "@/assets/js/utils/calcs";
+
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true
+  }
+});
+</script>
+
 <style scoped>
 .left-side {
   background-color: var(--card-bg-color);

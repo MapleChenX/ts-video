@@ -1,17 +1,21 @@
 <template>
-  <div class="home hide-scroll flex justify-between">
-    <LeftSide />
-    <div class="views hide-scroll">
-      <RouterView />
+  <div class="home">
+    <BlogHeader :user="data[0]" />
+    <div class="content flex justify-between">
+      <LeftSide :user="data[0]" />
+      <div class="views hide-scroll">
+        <RouterView />
+      </div>
+      <RightSide />
     </div>
-    <RightSide />
   </div>
 </template>
 
 <script setup>
 import service from "@/request";
+import { useCookies } from "@vueuse/integrations/useCookies";
 
-const { data } = await service.post("/get/posts");
+const { data } = await service.post("/get/user", { id: useCookies().get("signed") });
 </script>
 
 <style scoped>
@@ -23,5 +27,9 @@ const { data } = await service.post("/get/posts");
   box-sizing: border-box;
   background-color: var(--card-bg-color);
   width: 39vw;
+}
+
+.content {
+  height: 91vh;
 }
 </style>

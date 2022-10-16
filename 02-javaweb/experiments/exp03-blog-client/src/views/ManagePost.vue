@@ -27,10 +27,11 @@ import { ref, h } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
 import service from "@/request";
+import { useCookies } from "@vueuse/integrations/useCookies";
 
 const router = useRouter();
 
-const { data } = await service.post("/get/posts");
+const { data } = await service.post("/get/posts", { id: useCookies().get("signed") });
 
 let posts = ref(data);
 let centerDialogVisible = ref(false);

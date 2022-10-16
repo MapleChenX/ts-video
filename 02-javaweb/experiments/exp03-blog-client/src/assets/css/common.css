@@ -110,6 +110,18 @@
   padding: 10px;
 }
 
+.pad-tb-5 {
+  padding: 5px 0;
+}
+
+.pad-tb-10 {
+  padding: 10px 0;
+}
+
+.pad-tb-15 {
+  padding: 15px 0;
+}
+
 .tip-title {
   display: block;
   margin: 20px 0;

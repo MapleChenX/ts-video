@@ -1,6 +1,8 @@
 <template>
   <div class="header flex row align-center justify-between items-center radius">
-    <div class="left"><a href="https://www.cnblogs.com/Enziandom/">ZhengRenFu</a></div>
+    <div class="left">
+      <a href="https://www.cnblogs.com/Enziandom/">{{ user.showName }}</a>
+    </div>
     <ul class="right flex row">
       <li class="item"><router-link to="/">首页</router-link></li>
       <li class="item"><router-link to="/">标签</router-link></li>
@@ -9,7 +11,18 @@
     </ul>
   </div>
 </template>
-<script></script>
+
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true
+  }
+});
+</script>
+
 <style scoped>
 .header {
   height: 8vh;

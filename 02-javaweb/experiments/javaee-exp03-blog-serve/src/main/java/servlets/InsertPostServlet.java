@@ -32,5 +32,6 @@ public class InsertPostServlet extends HttpServlet {
     post.setViews(0);
     post.setUserId(10000);
     op.load(post).insert();
+    op.close();
   }
 }

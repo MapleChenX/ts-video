@@ -26,13 +26,13 @@ public class CrossOriginFilter implements Filter {
     servletResponse.setCharacterEncoding("UTF-8");
     HttpServletResponse response = (HttpServletResponse) servletResponse;
     // 允许跨域的主机地址
-    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
     // 允许跨域的请求方法 GET、POST、HEAD 等
     response.setHeader("Access-Control-Allow-Methods", "*");
     // 重新预检验跨域的缓存时间 (s)
     response.setHeader("Access-Control-Max-Age", "3600");
     // 允许跨域的请求头
-    response.setHeader("Access-Control-Allow-Headers", "*");
+    response.setHeader("Access-Control-Allow-Headers", "Accept, Origin, XRequestedWith, Content-Type, LastModified");
     // 是否携带 Cookie
     response.setHeader("Access-Control-Allow-Credentials", "true");
     filterChain.doFilter(servletRequest, response);

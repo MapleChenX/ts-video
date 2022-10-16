@@ -4,10 +4,7 @@
   <Suspense>
     <div class="app flex col items-center">
       <div class="container hide-scroll">
-        <BlogHeader />
-        <div class="content hide-scroll">
-          <RouterView />
-        </div>
+        <RouterView />
       </div>
     </div>
     <template #fallback> Loading... </template>

@@ -29,4 +29,10 @@ public class User {
   private int age;
   @Field("create_date")
   private Date createDate;
+  @Field("fans")
+  private int fans;
+  @Field("follows")
+  private int follows;
+  @Field("show_name")
+  private String showName;
 }

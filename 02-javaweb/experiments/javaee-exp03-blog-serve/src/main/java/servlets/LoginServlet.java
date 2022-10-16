@@ -1,8 +1,5 @@
 package servlets;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import configs.MySQLConfig;
 import entities.User;
 import jakarta.servlet.ServletException;
@@ -28,14 +25,18 @@ public class LoginServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    User user = (User) ParseReqBody.get(req, User.class);
-    JdbcOperation<User> operation = op.load(user).select(true, "username = '" + user.getUsername() + "' and password = '" + user.getPassword() + "'");
-    List<User> users = operation.getObject();
+    resp.setContentType("application/json");
+    User body = (User) ParseReqBody.get(req, User.class);
+    op.load(body).select(true, "username = '" + body.getUsername() + "' and password = '" + body.getPassword() + "'");
+    List<User> users = op.getList();
     if (!users.isEmpty()) {
-      User cookieUser = users.get(0);
-      resp.addCookie(new Cookie("signed", String.valueOf(cookieUser.getId())));
+      User user = users.get(0);
+      Cookie cookie = new Cookie("signed", String.valueOf(user.getId()));
+      cookie.setPath("/");
+      cookie.setMaxAge(3600 * 24 * 7);
+      resp.addCookie(cookie);
     }
-    resp.getWriter().write(operation.getJson());
-    operation.close();
+    resp.getWriter().write(op.getJson());
+    op.close();
   }
 }
