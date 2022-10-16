@@ -1,6 +1,9 @@
 <template>
-  <div class="left-side hide-scroll">
-    <img class="avatar cover radius" :src="user.avatar" />
+  <div class="left-side hide-scroll pad-all-15">
+    <div class="profile">
+      <el-button class="edit-profile" type="primary" :icon="Edit" size="small" circle @click="editProfile"></el-button>
+      <img class="avatar cover radius" :src="user.avatar" />
+    </div>
     <div class="info pad-b-15 border-b-dotted mar-t-10 size-13 flex justify-between align-center items-center">
       <div class="year">
         <div class="num text-center">{{ calcBlogAge(user.createDate).days }}天</div>
@@ -46,8 +49,12 @@
 </template>
 
 <script setup>
+import { Edit } from "@element-plus/icons-vue";
 import { defineProps } from "vue";
 import { calcBlogAge } from "@/assets/js/utils/calcs";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const props = defineProps({
   user: {
@@ -55,18 +62,31 @@ const props = defineProps({
     required: true
   }
 });
+
+function editProfile() {
+  router.push("/h/edit/profile");
+}
 </script>
 
 <style scoped>
 .left-side {
   background-color: var(--card-bg-color);
   width: 12.5vw;
-  padding: 15px;
   box-sizing: border-box;
 }
 
-.left-side .avatar {
+.avatar {
   width: 100%;
   height: calc(12.5vw - 30px);
+}
+
+.profile {
+  position: relative;
+}
+
+.edit-profile {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>

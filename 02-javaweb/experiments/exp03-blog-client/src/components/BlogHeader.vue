@@ -11,13 +11,10 @@
         <router-link class="flex align-center items-center justify-center" to="/h/square">广场</router-link>
       </li>
       <li class="item flex align-center items-center justify-center">
-        <router-link class="flex align-center items-center justify-center" to="/h/posts">标签</router-link>
+        <router-link class="flex align-center items-center justify-center" to="/h/new/post">新建随笔</router-link>
       </li>
       <li class="item flex align-center items-center justify-center">
-        <router-link class="flex align-center items-center justify-center" to="/h/new/post">新随笔</router-link>
-      </li>
-      <li class="item flex align-center items-center justify-center">
-        <router-link class="flex align-center items-center justify-center" to="/h/manage/post">管理</router-link>
+        <router-link class="flex align-center items-center justify-center" to="/h/manage/post">管理随笔</router-link>
       </li>
       <li class="item"><el-button @click="quit" size="small">注销</el-button></li>
     </ul>

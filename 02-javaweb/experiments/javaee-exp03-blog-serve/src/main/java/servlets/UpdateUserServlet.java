@@ -1,7 +1,7 @@
 package servlets;
 
 import configs.MySQLConfig;
-import entities.Post;
+import entities.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,12 +11,11 @@ import utils.JdbcOperation;
 import utils.ParseReqBody;
 
 import java.io.IOException;
-import java.util.Date;
 
-@WebServlet(name = "UpdatePost", urlPatterns = {"/update/post"})
-public class UpdatePostServlet extends HttpServlet {
+@WebServlet(name = "UpdateUser", urlPatterns = {"/update/user"})
+public class UpdateUserServlet extends HttpServlet {
 
-  private static final JdbcOperation<Post> op = new JdbcOperation<>(MySQLConfig.class, Post.class);
+  private static final JdbcOperation<User> op = new JdbcOperation<>(MySQLConfig.class, User.class);
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,9 +24,8 @@ public class UpdatePostServlet extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    Post post = (Post) ParseReqBody.get(req, Post.class);
-    post.setPostDate(new Date());
-    op.load(post).update();
+    User user = (User) ParseReqBody.get(req, User.class);
+    op.load(user).update();
     op.close();
   }
 }
