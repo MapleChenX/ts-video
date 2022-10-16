@@ -43,7 +43,6 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 
 let user = ref(new User());
 user.value = inject("user");
-console.log(user.value);
 user.value.id = useCookies().get("signed");
 
 function updateProfile() {
