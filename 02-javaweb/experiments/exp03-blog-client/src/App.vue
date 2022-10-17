@@ -21,9 +21,4 @@
   width: 65vw;
   height: 100vh;
 }
-
-.content {
-  width: 100%;
-  height: 91vh;
-}
 </style>

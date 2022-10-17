@@ -9,7 +9,7 @@
         <el-button size="small" @click="editPost" type="primary" :icon="Edit" circle plain />
       </template>
     </div>
-    <div class="content">{{ post.content }}</div>
+    <div class="content" v-parse-code v-html="content"></div>
     <div class="footer">
       <div class="info flex justify-end size-13">
         <div class="post-date mar-r-10">最近修改：{{ post.postDate }}</div>
@@ -21,16 +21,19 @@
 <script setup>
 import { ref } from "vue";
 import { Edit } from "@element-plus/icons-vue";
-import service from "@/request";
 import { useRoute, useRouter } from "vue-router";
 import { useCookies } from "@vueuse/integrations/useCookies";
+import { marked } from "marked";
+import service from "@/request";
 
 const id = useCookies().get("signed");
 const route = useRoute();
 const router = useRouter();
+let content = ref("");
 
 const { data } = await service.post(`/get/post?id=${route.query.id}`);
 let post = ref(data[0]);
+content.value = marked(post.value.content);
 
 function editPost() {
   router.push({ path: "/h/edit", query: { id: route.query.id } });

@@ -1,6 +1,6 @@
 <template>
   <div class="manage-post pad-all-10">
-    <el-table highlight-current-row :data="posts" stripe style="width: 100%">
+    <el-table highlight-current-row :data="data" stripe style="width: 100%">
       <el-table-column prop="createDate" label="发表日期" sortable />
       <el-table-column prop="title" label="文章标题" />
       <el-table-column label="操作">
@@ -10,11 +10,11 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-dialog v-model="centerDialogVisible" title="⚠警告" width="30%" align-center>
+    <el-dialog v-model="dialog" title="⚠警告" width="30%" align-center>
       <span>{{ dialogTitle }}</span>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">取消</el-button>
+          <el-button @click="dialog = false">取消</el-button>
           <el-button type="primary" @click="deletePost">确定</el-button>
         </span>
       </template>
@@ -23,18 +23,17 @@
 </template>
 
 <script setup>
-import { ref, h } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { ElMessage } from "element-plus";
-import service from "@/request";
 import { useCookies } from "@vueuse/integrations/useCookies";
+import service from "@/request";
 
 const router = useRouter();
 
 const { data } = await service.post("/get/posts", { id: useCookies().get("signed") });
 
-let posts = ref(data);
-let centerDialogVisible = ref(false);
+let dialog = ref(false);
 let dialogTitle = ref("");
 
 function handleEdit(index, row) {
@@ -44,7 +43,7 @@ function handleEdit(index, row) {
 let post = ref();
 
 function handleDelete(index, row) {
-  centerDialogVisible.value = true;
+  dialog.value = true;
   post.value = row;
   dialogTitle.value = `是否删除 ${row.title} ？`;
 }
@@ -58,7 +57,7 @@ function deletePost() {
         message: `删除成功！`,
         type: "success"
       });
-      centerDialogVisible.value = false;
+      dialog.value = false;
     })
     .catch(err => {
       ElMessage({
@@ -66,7 +65,7 @@ function deletePost() {
         message: `删除失败！`,
         type: "error"
       });
-      centerDialogVisible.value = false;
+      dialog.value = false;
     });
 }
 </script>

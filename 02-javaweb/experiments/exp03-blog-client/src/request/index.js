@@ -2,7 +2,7 @@ import axios from "axios";
 
 const service = axios.create({
   baseURL: "http://localhost:8080/blog-serve",
-  timeout: 1000
+  timeout: 5000
 });
 
 // Add a request interceptor

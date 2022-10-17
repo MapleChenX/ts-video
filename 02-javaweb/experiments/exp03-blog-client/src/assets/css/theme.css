@@ -43,14 +43,14 @@
   --blog-bg-color: #191919; /* 背景颜色 */
   --text-color: #a7a7a7; /* 文字颜色 */
   --border-color: #494545; /* 边框颜色 */
-  --catalog-bg-color: #252525; /*  */
+  --catalog-bg-color: #252525; /* 目录背景颜色 */
   --blockquote-bg-color: #2b2b2b; /* 引用背景颜色 */
-  --code-bg-color: #3a3a3a;
+  --code-bg-color: #3a3a3a; /* 代码背景颜色 */
   --table-tg-bg-color: #2b2b2b; /* 表头背景顏色 */
   --border-radius: 4px; /* 圆角半径 */
   --calendar-other-month-color: #828282; /* 日历非本月日期颜色 */
-  --bloger-status-bg-color: rgba(50, 50, 50, 0.65);
-  --img-desc-color: #8d8d8d;
+  --bloger-status-bg-color: rgba(50, 50, 50, 0.65); /* 博客状态背景颜色 */
+  --img-desc-color: #8d8d8d; /* 图片描述字体颜色 */
 }
 
 :root[mode="light"] {

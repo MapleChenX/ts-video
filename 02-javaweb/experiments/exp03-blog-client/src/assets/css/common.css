@@ -42,60 +42,72 @@
   font-size: 18px;
 }
 
-.mar-all-10 {
-  margin: 10px;
+.size-19 {
+  font-size: 19px;
+}
+
+.size-20 {
+  font-size: 20px;
+}
+
+.size-21 {
+  font-size: 21px;
+}
+
+.size-22 {
+  font-size: 22px;
 }
 
 .mar-all-5 {
   margin: 5px;
 }
 
-.mar-lr-10 {
-  margin: 0 10px;
+.mar-all-10 {
+  margin: 10px;
 }
 
 .mar-lr-5 {
   margin: 0 5px;
 }
 
-.mar-tb-10 {
-  margin: 10px 0;
+.mar-lr-10 {
+  margin: 0 10px;
 }
 
 .mar-tb-5 {
   margin: 5px 0;
 }
 
-.mar-t-10 {
-  margin-top: 10px;
+.mar-tb-10 {
+  margin: 10px 0;
 }
 
 .mar-t-5 {
   margin-top: 5px;
 }
 
-.mar-b-10 {
-  margin-bottom: 10px;
+.mar-t-10 {
+  margin-top: 10px;
 }
 
 .mar-b-5 {
   margin-bottom: 5px;
 }
 
-.mar-r-10 {
-  margin-right: 10px;
+.mar-b-10 {
+  margin-bottom: 10px;
 }
 
 .mar-r-5 {
   margin-right: 5px;
 }
 
-.border-b-dotted {
-  border-bottom: 1px dotted var(--border-color);
+.mar-r-10 {
+  margin-right: 10px;
 }
 
-.pad-b-15 {
-  padding-bottom: 15px;
+.border-b-dotted {
+  border-bottom: 1px dotted var(--border-color);
 }
 
 .pad-b-10 {
@@ -104,6 +116,10 @@
 
 .pad-b-5 {
   padding-bottom: 5px;
+}
+
+.pad-b-15 {
+  padding-bottom: 15px;
 }
 
 .pad-all-10 {

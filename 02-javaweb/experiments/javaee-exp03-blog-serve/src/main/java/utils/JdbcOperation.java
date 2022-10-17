@@ -4,16 +4,13 @@ import annotations.DatabaseConfig;
 import annotations.Table;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
 import configs.MySQLConfig;
 import lombok.Getter;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -64,10 +61,6 @@ public class JdbcOperation<T> {
     }
   }
 
-  private String formatDateTime(java.util.Date data) {
-    return new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(data);
-  }
-
   public JdbcOperation<T> load(T entity) {
     tableFieldsName.clear();
     tableFieldsValue.clear();
@@ -107,6 +100,8 @@ public class JdbcOperation<T> {
     }
     sql.deleteCharAt(sql.length() - 1);
     sql.append(")");
+    sql.toString().replaceAll("\"","\\\\\\\"");
+    sql.toString().replaceAll("'", "\\\\\\'");
     execute(String.valueOf(sql), true);
     return this;
   }
@@ -157,6 +152,8 @@ public class JdbcOperation<T> {
       }
     }
     sql.deleteCharAt(sql.length() - 1);
+    sql.toString().replaceAll("\"","\\\\\\\"");
+    sql.toString().replaceAll("'", "\\\\\\'");
     sql.append(" where id='").append(tableFieldsValue.get(idFieldIndex)).append("'");
     execute(String.valueOf(sql), true);
     return this;
@@ -184,7 +181,7 @@ public class JdbcOperation<T> {
     return this;
   }
 
-  public List<T> getObject() {
+  public void getObject() {
     list = new ArrayList<>();
     if (resultSet == null) try {
       throw new Exception("ResultSet 为空。数据查询是否成功或 select() 函数是否被使用？");
@@ -209,7 +206,6 @@ public class JdbcOperation<T> {
              InvocationTargetException e) {
       throw new RuntimeException(e);
     }
-    return list;
   }
 
   public String getJson() {

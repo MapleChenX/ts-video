@@ -13,8 +13,8 @@
 
 <script setup>
 import { provide } from "vue";
-import service from "@/request";
 import { useCookies } from "@vueuse/integrations/useCookies";
+import service from "@/request";
 
 const { data } = await service.post("/get/user", { id: useCookies().get("signed") });
 provide("user", data[0]);

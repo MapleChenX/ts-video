@@ -28,7 +28,6 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 import { ElMessage } from "element-plus";
 
 const router = useRouter();
-const { remove } = useCookies();
 
 const props = defineProps({
   user: {
@@ -38,7 +37,7 @@ const props = defineProps({
 });
 
 function quit() {
-  remove("signed", { domain: "localhost", path: "/" });
+  useCookies().remove("signed", { domain: "localhost", path: "/" });
   setTimeout(() => {
     router.push("/login");
     ElMessage({

@@ -15,10 +15,12 @@
         <el-input v-model="user.showName" placeholder="请输入昵称"></el-input>
       </div>
       <div class="item btns flex align-center justify-between items-center">
-        <el-button @click="handleRegister" type="primary">注册</el-button>
-        <el-button @click="handleReturn">返回</el-button>
+        <el-button @click="register" type="primary">注册</el-button>
+        <el-button @click="router.push('/login')">返回</el-button>
       </div>
-      <div class="info size-12 text-center"><a target="_blank" href="https://github.com/Enziandom/java-learning/tree/main/02-javaweb/experiments">About Source</a></div>
+      <div class="info size-12 text-center">
+        <a target="_blank" href="https://github.com/Enziandom/java-learning/tree/main/02-javaweb/experiments">About Source</a>
+      </div>
     </div>
   </div>
 </template>
@@ -33,7 +35,7 @@ import User from "@/entities/user";
 const router = useRouter();
 let user = ref(new User());
 
-function handleRegister() {
+function register() {
   service
     .post("/register", user.value)
     .then(res => {
@@ -61,10 +63,6 @@ function handleRegister() {
         type: "error"
       });
     });
-}
-
-function handleReturn() {
-  router.push("/login");
 }
 </script>
 

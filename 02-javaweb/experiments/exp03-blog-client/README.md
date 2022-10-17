@@ -1,10 +1,13 @@
-# JavaEE 博客前端
+# 项目说明
 
-基于 Vite + Vue3 + ElementPlus 构建的博客前端，根据[我的博客园](https://www.cnblogs.com/Enziandom/)来模拟的一个简易博客。
+使用的技术：Vite、Vue3、ElementPlus。
+
+根据[我的博客园](https://www.cnblogs.com/Enziandom/)模拟的简易博客。
 
 # 功能介绍
 
-1. 基本的增删改查文章
-2. 可以登录自己的博客
-3. 可以免登录，定期清除 Cookie
-4. 可以编辑个人的信息
+1. 基本的增删改查文章；
+2. 可以登录自己的博客；
+3. 可以 1 天或 7 天免登录；
+4. 可以编辑个人的信息；
+5. 可以在广场中查看其他人发布的博客。

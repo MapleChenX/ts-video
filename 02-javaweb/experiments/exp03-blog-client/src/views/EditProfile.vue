@@ -36,17 +36,25 @@
 </template>
 
 <script setup>
+import { ref, inject } from "vue";
+import { ElMessage } from "element-plus";
 import service from "@/request";
 import User from "@/entities/user";
-import { ref, inject } from "vue";
-import { useCookies } from "@vueuse/integrations/useCookies";
 
 let user = ref(new User());
 user.value = inject("user");
-user.value.id = useCookies().get("signed");
 
 function updateProfile() {
-  service.post("/update/user", user.value);
+  service
+    .post("/update/user", user.value)
+    .then(res => {
+      ElMessage({
+        center: true,
+        message: `更新成功！`,
+        type: "success"
+      });
+    })
+    .catch(err => {});
 }
 </script>
 

@@ -87,7 +87,9 @@
     </div>
   </div>
 </template>
+
 <script></script>
+
 <style scoped>
 .right-side {
   background-color: var(--card-bg-color);

@@ -34,6 +34,18 @@
   align-content: flex-start;
 }
 
+.align-end {
+  align-content: flex-end;
+}
+
 .items-center {
   align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
 }
