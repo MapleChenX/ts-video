@@ -1,23 +1,20 @@
+package stage02;
+
 import stage02.annotations.DataConfigure;
 import stage02.configs.Config;
-import stage02.configs.MySQLConfig;
-import stage02.configs.SqlServerConfig;
 
 import java.lang.reflect.InvocationTargetException;
 
 
-public class Main<T extends Config> {
+public class LoadConfig<T extends Config> {
 
   private final T config;
 
-  public static void main(String[] args) {
-    Main<MySQLConfig> mysql = new Main<>(MySQLConfig.class);
-    Main<SqlServerConfig> sqlServer = new Main<>(SqlServerConfig.class);
-    System.out.println(mysql.config.toString());
-    System.out.println(sqlServer.config.toString());
+  public T getConfig() {
+    return config;
   }
 
-  public Main(Class<T> clz) {
+  public LoadConfig(Class<T> clz) {
     try {
       config = clz.getDeclaredConstructor().newInstance();
       DataConfigure annotation = clz.getAnnotation(DataConfigure.class);
