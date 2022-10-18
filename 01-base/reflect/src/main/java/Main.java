@@ -1,34 +1,32 @@
-import stage01.annotations.Property;
-import stage01.clzs.User;
 import stage02.annotations.DataConfigure;
+import stage02.configs.Config;
 import stage02.configs.MySQLConfig;
+import stage02.configs.SqlServerConfig;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 
 
-public class Main {
-  private MySQLConfig config;
+public class Main<T extends Config> {
+
+  private final T config;
 
   public static void main(String[] args) {
-    Main main = new Main();
-    System.out.println("密码：" + main.config.getPassword());
+    Main<MySQLConfig> mysql = new Main<>(MySQLConfig.class);
+    Main<SqlServerConfig> sqlServer = new Main<>(SqlServerConfig.class);
+    System.out.println(mysql.config.toString());
+    System.out.println(sqlServer.config.toString());
   }
 
-  public Main() {
-    loadConfig();
-  }
-
-  private void loadConfig() {
+  public Main(Class<T> clz) {
     try {
-      Class<MySQLConfig> configClz = MySQLConfig.class;
-      config = configClz.getDeclaredConstructor().newInstance();
-      for (Field field : configClz.getDeclaredFields()) {
-        field.setAccessible(true);
-        field.set(config, field.getAnnotation(DataConfigure.class).value());
-      }
+      config = clz.getDeclaredConstructor().newInstance();
+      DataConfigure annotation = clz.getAnnotation(DataConfigure.class);
+      config.setPassword(annotation.password());
+      config.setUsername(annotation.username());
+      config.setUrl(annotation.url());
     } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
       throw new RuntimeException(e);
     }
   }
+
 }
