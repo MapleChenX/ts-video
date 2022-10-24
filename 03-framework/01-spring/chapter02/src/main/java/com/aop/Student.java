@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class Student {
 
   public void say() {
-    System.out.println("Student normal => Hello");
+    System.out.println("Student => hello...");
   }
 
 }

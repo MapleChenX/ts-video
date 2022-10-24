@@ -9,23 +9,17 @@
   <version>1.0-SNAPSHOT</version>
 
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>4.3.6.RELEASE</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>4.3.6.RELEASE</version>
+      <version>5.3.23</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-      <version>4.3.6.RELEASE</version>
+      <version>5.3.23</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
     <dependency>
@@ -37,13 +31,13 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
-      <version>4.3.6.RELEASE</version>
+      <version>5.3.23</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-aspects -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aspects</artifactId>
-      <version>4.3.6.RELEASE</version>
+      <version>5.3.23</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
     <dependency>
@@ -55,7 +49,7 @@
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>1.8.0</version>
+      <version>1.9.9.1</version>
     </dependency>
   </dependencies>
 

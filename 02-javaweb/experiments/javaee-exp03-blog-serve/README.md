@@ -5,7 +5,7 @@
 本人通过注解以及反射机制封装了 JDBC 操作，目前只能支持单表查询，多表查询涉及更多的实体类和字段，实现起来比较复杂。并且，目的除了完成课程
 作业以外，还是练习反射和注解。
 
-> GitHub 地址：https://github.com/Enziandom/java-learning。
+> GitHub 地址：https://github.com/Enziandom/java-learning
 
 # 包的介绍
 
