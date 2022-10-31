@@ -1,4 +1,4 @@
-package stage01;
+package entities;
 
 public class Customer {
 

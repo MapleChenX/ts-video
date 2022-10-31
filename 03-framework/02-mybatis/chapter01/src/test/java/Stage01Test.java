@@ -1,16 +1,34 @@
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import stage01.Customer;
+import org.junit.Test;
+import entities.Customer;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class Stage01Test {
 
+  SqlSession sqlSession;
+
+  {
+    try {
+      sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-config.xml")).openSession();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @Test
+  public void select() {
+    List<Customer> customers = sqlSession.selectList("stage01.CustomerMapper.selectAll");
+    System.out.println(Arrays.toString(customers.toArray()));
+  }
+
+
   @org.junit.Test
-  public void add() throws IOException {
-    SqlSession sqlSession = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-config.xml")).openSession();
+  public void add() {
     Customer customer = new Customer();
     customer.setUsername("cust04");
     customer.setPassword("123456");
@@ -25,5 +43,10 @@ public class Stage01Test {
     sqlSession.close();
   }
 
+  @Test
+  public void delete() {
+    sqlSession.delete("stage01.CustomerMapper.deleteCustomerById", 12);
+    sqlSession.commit();
+  }
 
 }
