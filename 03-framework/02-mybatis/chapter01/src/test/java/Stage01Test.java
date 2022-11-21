@@ -28,7 +28,7 @@ public class Stage01Test {
 
 
   @org.junit.Test
-  public void add() {
+  public void insert() {
     Customer customer = new Customer();
     customer.setUsername("cust04");
     customer.setPassword("123456");
@@ -47,6 +47,21 @@ public class Stage01Test {
   public void delete() {
     sqlSession.delete("stage01.CustomerMapper.deleteCustomerById", 12);
     sqlSession.commit();
+  }
+
+  @Test
+  public void update() {
+    Customer customer = new Customer();
+    customer.setId(3);
+    customer.setUsername("cust01");
+    customer.setPassword("123456");
+    customer.setMobilephone("11111111111");
+    customer.setSex("男");
+    customer.setJobs("Java 中级工程师");
+    customer.setEducation("专科");
+    sqlSession.update("stage01.CustomerMapper.updateCustomer", customer);
+    sqlSession.commit();
+    sqlSession.close();
   }
 
 }

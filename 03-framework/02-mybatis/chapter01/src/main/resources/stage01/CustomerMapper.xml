@@ -20,4 +20,10 @@
   <delete id="deleteCustomerById" parameterType="Integer">
     delete from t_customer where id = #{id};
   </delete>
+
+  <update id="updateCustomer" parameterType="entities.Customer">
+    update t_customer set username = #{username}, password = #{password},
+    sex = #{sex}, mobilephone = #{mobilephone}, education = #{education}, jobs = #{jobs}
+    where id = #{id};
+  </update>
 </mapper>
