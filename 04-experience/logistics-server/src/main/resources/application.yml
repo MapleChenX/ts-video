@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/logistics
+    username: root
+    password: enziandom
