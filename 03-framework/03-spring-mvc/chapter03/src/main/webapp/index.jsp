@@ -6,23 +6,23 @@
   <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-2.1.0.min.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css"/>
   <script>
-      function testJson() {
-          let username = $("#username").val()
-          let password = $("#password").val()
+    function testJson() {
+      let username = $("#username").val()
+      let password = $("#password").val()
 
-          $.ajax({
-              url: "${pageContext.request.contextPath}/test/json",
-              type: "post",
-              data: JSON.stringify({username: username, password: password}),
-              contentType: "application/json;charset=UTF-8",
-              dataType: "json",
-              success: (data) => {
-                  if (data != null) {
-                      alert("您输入的用户名为：" + data.username + "密码为：" + data.password)
-                  }
-              }
-          })
-      }
+      $.ajax({
+        url: "${pageContext.request.contextPath}/test/json",
+        type: "post",
+        data: JSON.stringify({username: username, password: password}),
+        contentType: "application/json;charset=UTF-8",
+        dataType: "json",
+        success: (data) => {
+          if (data != null) {
+            alert("您输入的用户名为：" + data.username + "密码为：" + data.password)
+          }
+        }
+      })
+    }
   </script>
 </head>
 <body>
