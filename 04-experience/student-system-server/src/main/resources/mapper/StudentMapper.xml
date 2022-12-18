@@ -11,7 +11,6 @@
     <association property="profession" columnPrefix="p_" javaType="Profession" autoMapping="true"/>
     <association property="grade" columnPrefix="g_" javaType="Grade" autoMapping="true"/>
   </resultMap>
-
   <select id="queryMyself" resultMap="mapOfQueryMyself" parameterType="Student">
     SELECT s.*,
            c.cno     c_cno,
@@ -30,20 +29,73 @@
            JOIN `colleges` as c on c.cno = s.college_id
            JOIN `grades` as g on g.gno = s.grade_id
            JOIN `professions` as p on p.pno = s.profession_id
-    WHERE s.sno = #{sno};
+    WHERE s.sno = #{sno}
   </select>
 
-  <resultMap id="mapOfQueryMyCourses" type="UniCourse">
-    <association property="course" autoMapping="true"/>
-    <association property="teacher" columnPrefix="t_" autoMapping="true"/>
+  <resultMap id="mapOfQueryMyCourses" type="UniCourse" autoMapping="true">
+    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
+    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
   </resultMap>
-
   <select id="queryMyCourses" resultMap="mapOfQueryMyCourses" parameterType="Student">
-    SELECT c.*, t.name t_name
+    SELECT sc.term,
+           sc.stu_id,
+           c.name     c_name,
+           c.property c_property,
+           c.credit   c_credit,
+           t.name     t_name
     FROM `stu_course` AS sc
            JOIN `courses` AS c ON sc.course_id = c.cno
            JOIN `teachers` AS t ON sc.teacher_id = t.tno
-    WHERE sc.sno = #{sno};
+    WHERE sc.stu_id = #{sno}
+  </select>
+
+  <resultMap id="mapOfQueryMyCoursesByTerm" type="UniCourse" extends="mapOfQueryMyCourses"/>
+  <select id="queryMyCoursesByTerm" resultMap="mapOfQueryMyCoursesByTerm" parameterType="map">
+    SELECT sc.term,
+           sc.stu_id,
+           c.name     c_name,
+           c.property c_property,
+           c.credit   c_credit,
+           t.name     t_name
+    FROM `stu_course` AS sc
+           JOIN `courses` AS c ON sc.course_id = c.cno
+           JOIN `teachers` AS t ON sc.teacher_id = t.tno
+    WHERE sc.stu_id = #{sno}
+      AND sc.term = #{term}
+  </select>
+
+  <resultMap id="mapOfQueryMyScores" type="UniScore" autoMapping="true">
+    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
+    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
+  </resultMap>
+  <select id="queryMyScores" resultMap="mapOfQueryMyScores" parameterType="Student">
+    SELECT scs.term,
+           scs.score,
+           c.name     c_name,
+           c.cno      c_cno,
+           c.property c_property,
+           c.credit   c_credit,
+           t.name     t_name
+    FROM `stu_course_score` AS scs
+           JOIN `courses` AS c ON scs.course_id = c.cno
+           JOIN `teachers` AS t ON scs.teacher_id = t.tno
+    where scs.stu_id = #{sno}
+  </select>
+
+  <resultMap id="mapOfQueryMyScoresByTerm" type="UniScore" extends="mapOfQueryMyScores"/>
+  <select id="queryMyScoresByTerm" resultMap="mapOfQueryMyScoresByTerm" parameterType="map">
+    SELECT scs.term,
+           scs.score,
+           c.name     c_name,
+           c.cno      c_cno,
+           c.property c_property,
+           c.credit   c_credit,
+           t.name     t_name
+    FROM `stu_course_score` AS scs
+           JOIN `courses` AS c ON scs.course_id = c.cno
+           JOIN `teachers` AS t ON scs.teacher_id = t.tno
+    WHERE scs.stu_id = #{sno}
+      AND scs.term = #{term}
   </select>
 
 </mapper>

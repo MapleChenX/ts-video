@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UniCourse {
+public class UniScore {
 
   private Course course;
   private Teacher teacher;
   private String term;
+  private double score;
   private int stuId;
 
 }

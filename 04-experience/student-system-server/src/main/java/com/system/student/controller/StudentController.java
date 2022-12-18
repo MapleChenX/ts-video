@@ -2,6 +2,7 @@ package com.system.student.controller;
 
 import com.system.student.entity.Student;
 import com.system.student.entity.union.UniCourse;
+import com.system.student.entity.union.UniScore;
 import com.system.student.entity.union.UniStudent;
 import com.system.student.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,21 @@ public class StudentController {
   @GetMapping("/query/courses")
   public List<UniCourse> queryMyCourses(@RequestParam("sno") int sno) {
     return service.queryMyCourses(sno);
+  }
+
+  @GetMapping("/query/courses/by/term")
+  public List<UniCourse> queryMyCoursesByTerm(@RequestParam("sno") int sno, @RequestParam("term") String term) {
+    return service.queryMyCoursesByTerm(sno, term);
+  }
+
+  @GetMapping("/query/scores")
+  public List<UniScore> queryMyScores(@RequestParam("sno") int sno) {
+    return service.queryMyScores(sno);
+  }
+
+  @GetMapping("/query/scores/by/term")
+  public List<UniScore> queryMyScoresByTerm(@RequestParam("sno") int sno, @RequestParam("term") String term) {
+    return service.queryMyScoresByTerm(sno, term);
   }
 
 }
