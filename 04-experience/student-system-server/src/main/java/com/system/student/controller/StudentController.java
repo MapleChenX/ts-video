@@ -1,6 +1,7 @@
 package com.system.student.controller;
 
 import com.system.student.entity.Student;
+import com.system.student.entity.union.UniActivity;
 import com.system.student.entity.union.UniCourse;
 import com.system.student.entity.union.UniScore;
 import com.system.student.entity.union.UniStudent;
@@ -45,6 +46,11 @@ public class StudentController {
   @GetMapping("/query/scores/by/term")
   public List<UniScore> queryMyScoresByTerm(@RequestParam("sno") int sno, @RequestParam("term") String term) {
     return service.queryMyScoresByTerm(sno, term);
+  }
+
+  @GetMapping("/query/activities")
+  public List<UniActivity> queryMyActivities(@RequestParam("sno") int sno) {
+    return service.queryMyActivities(sno);
   }
 
 }

@@ -1,6 +1,7 @@
 package com.system.student.mapper;
 
 import com.system.student.entity.Student;
+import com.system.student.entity.union.UniActivity;
 import com.system.student.entity.union.UniCourse;
 import com.system.student.entity.union.UniScore;
 import com.system.student.entity.union.UniStudent;
@@ -21,5 +22,7 @@ public interface StudentMapper {
   List<UniScore> queryMyScores(Student student);
 
   List<UniScore> queryMyScoresByTerm(Map<String, Object> map);
+
+  List<UniActivity> queryMyActivities(Student student);
 
 }

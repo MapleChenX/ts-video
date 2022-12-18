@@ -68,9 +68,12 @@
     <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
     <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
   </resultMap>
+  <sql id="queryMyScoresSql">
+  </sql>
   <select id="queryMyScores" resultMap="mapOfQueryMyScores" parameterType="Student">
     SELECT scs.term,
            scs.score,
+           scs.stu_id,
            c.name     c_name,
            c.cno      c_cno,
            c.property c_property,
@@ -86,6 +89,7 @@
   <select id="queryMyScoresByTerm" resultMap="mapOfQueryMyScoresByTerm" parameterType="map">
     SELECT scs.term,
            scs.score,
+           scs.stu_id,
            c.name     c_name,
            c.cno      c_cno,
            c.property c_property,
@@ -96,6 +100,14 @@
            JOIN `teachers` AS t ON scs.teacher_id = t.tno
     WHERE scs.stu_id = #{sno}
       AND scs.term = #{term}
+  </select>
+
+  <resultMap id="mapOfQueryMyActivities" type="UniActivity" autoMapping="true"/>
+  <select id="queryMyActivities" resultMap="mapOfQueryMyActivities" parameterType="Student">
+    SELECT *
+    FROM stu_acti AS sa
+           JOIN activities as ac ON sa.act_id = ac.eno
+    WHERE sa.stu_id = #{sno}
   </select>
 
 </mapper>
