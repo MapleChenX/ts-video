@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.system.student.mapper.StudentMapper">
+
+<resultMap id="mapOfQueryMyself" type="Student" autoMapping="true">
+
+  <association property="college" columnPrefix="c_" javaType="College">
+    <id property="cno" column="cno"/>
+    <result property="name" column="name"/>
+    <result property="intro" column="intro"/>
+  </association>
+  <association property="profession" columnPrefix="p_" javaType="Profession" autoMapping="true">
+    <id property="pno" column="pno"/>
+    <result property="name" column="name"/>
+    <result property="type" column="type"/>
+    <result property="eduSys" column="edu_sys"/>
+    <result property="degree" column="degree"/>
+    <result property="code" column="code"/>
+  </association>
+  <association property="grade" columnPrefix="g_" javaType="Grade">
+    <id property="gno" column="gno"/>
+    <result property="name" column="name"/>
+    <result property="layer" column="layer"/>
+    <result property="grade" column="grade"/>
+  </association>
+</resultMap>
+
+  <select id="queryMyself" resultMap="mapOfQueryMyself">
+    SELECT s.*,
+           c.cno     c_cno,
+           c.name    c_name,
+           p.pno     p_pno,
+           p.name    p_name,
+           p.type    p_type,
+           p.edu_sys p_edu_sys,
+           p.degree  p_degree,
+           p.code    p_code,
+           g.gno     g_gno,
+           g.name    g_name,
+           g.layer   g_layer,
+           g.grade   g_grade
+    FROM `students` as s
+           JOIN `colleges` as c on c.cno = s.college_id
+           JOIN `grades` as g on g.gno = s.grade_id
+           JOIN `professions` as p on p.pno = s.profession_id
+    WHERE s.sno = 1;
+  </select>
+
+</mapper>

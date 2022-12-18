@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: enziandom
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/stu_sys_db
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.system.student.entity
+  configuration:
+    map-underscore-to-camel-case: true
