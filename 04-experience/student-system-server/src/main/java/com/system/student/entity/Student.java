@@ -30,8 +30,4 @@ public class Student {
   private String loginDate;
   private String name;
 
-  private College college;
-  private Profession profession;
-  private Grade grade;
-
 }

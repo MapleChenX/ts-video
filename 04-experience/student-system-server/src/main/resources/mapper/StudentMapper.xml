@@ -5,30 +5,14 @@
 
 <mapper namespace="com.system.student.mapper.StudentMapper">
 
-<resultMap id="mapOfQueryMyself" type="Student" autoMapping="true">
+  <resultMap id="mapOfQueryMyself" type="UniStudent" autoMapping="true">
+    <association property="student" javaType="Student" autoMapping="true"/>
+    <association property="college" columnPrefix="c_" javaType="College" autoMapping="true"/>
+    <association property="profession" columnPrefix="p_" javaType="Profession" autoMapping="true"/>
+    <association property="grade" columnPrefix="g_" javaType="Grade" autoMapping="true"/>
+  </resultMap>
 
-  <association property="college" columnPrefix="c_" javaType="College">
-    <id property="cno" column="cno"/>
-    <result property="name" column="name"/>
-    <result property="intro" column="intro"/>
-  </association>
-  <association property="profession" columnPrefix="p_" javaType="Profession" autoMapping="true">
-    <id property="pno" column="pno"/>
-    <result property="name" column="name"/>
-    <result property="type" column="type"/>
-    <result property="eduSys" column="edu_sys"/>
-    <result property="degree" column="degree"/>
-    <result property="code" column="code"/>
-  </association>
-  <association property="grade" columnPrefix="g_" javaType="Grade">
-    <id property="gno" column="gno"/>
-    <result property="name" column="name"/>
-    <result property="layer" column="layer"/>
-    <result property="grade" column="grade"/>
-  </association>
-</resultMap>
-
-  <select id="queryMyself" resultMap="mapOfQueryMyself">
+  <select id="queryMyself" resultMap="mapOfQueryMyself" parameterType="Student">
     SELECT s.*,
            c.cno     c_cno,
            c.name    c_name,
@@ -46,7 +30,20 @@
            JOIN `colleges` as c on c.cno = s.college_id
            JOIN `grades` as g on g.gno = s.grade_id
            JOIN `professions` as p on p.pno = s.profession_id
-    WHERE s.sno = 1;
+    WHERE s.sno = #{sno};
+  </select>
+
+  <resultMap id="mapOfQueryMyCourses" type="UniCourse">
+    <association property="course" autoMapping="true"/>
+    <association property="teacher" columnPrefix="t_" autoMapping="true"/>
+  </resultMap>
+
+  <select id="queryMyCourses" resultMap="mapOfQueryMyCourses" parameterType="Student">
+    SELECT c.*, t.name t_name
+    FROM `stu_course` AS sc
+           JOIN `courses` AS c ON sc.course_id = c.cno
+           JOIN `teachers` AS t ON sc.teacher_id = t.tno
+    WHERE sc.sno = #{sno};
   </select>
 
 </mapper>
