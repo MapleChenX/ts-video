@@ -59,7 +59,6 @@ public class StudentController {
     @RequestParam(value = "type", required = false) Integer type,
     @RequestParam(value = "genre", required = false) Integer genre
   ) {
-    System.out.println("sno = " + sno + ", type = " + type + ", genre = " + genre);
     return service.queryActivitiesSeries(sno, type, genre);
   }
 
