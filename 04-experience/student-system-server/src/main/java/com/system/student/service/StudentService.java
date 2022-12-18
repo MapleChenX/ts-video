@@ -26,50 +26,40 @@ public class StudentService {
   public UniStudent querySelf(int sno) {
     Student student = new Student();
     student.setSno(sno);
-    return mapper.queryMyself(student);
+    return mapper.querySelf(student);
   }
 
-  public List<UniCourse> queryMyCourses(int sno) {
-    Student student = new Student();
-    student.setSno(sno);
-    return mapper.queryMyCourses(student);
-  }
-
-  public List<UniCourse> queryMyCoursesByTerm(int sno, String term) {
+  public List<UniCourse> queryCoursesSeries(Integer sno, String term) {
     Map<String, Object> map = new HashMap<>();
     map.put("sno", sno);
     map.put("term", term);
-    return mapper.queryMyCoursesByTerm(map);
+    return mapper.queryCoursesSeries(map);
   }
 
-  public List<UniScore> queryMyScores(int sno) {
-    Student student = new Student();
-    student.setSno(sno);
-    return mapper.queryMyScores(student);
-  }
-
-  public List<UniScore> queryMyScoresByTerm(int sno, String term) {
+  public List<UniScore> queryScoresSeries(Integer sno, String term) {
     Map<String, Object> map = new HashMap<>();
     map.put("sno", sno);
     map.put("term", term);
-    return mapper.queryMyScoresByTerm(map);
+    return mapper.queryScoresSeries(map);
   }
 
-  public List<UniActivity> queryMyActivities(int sno) {
-    Student student = new Student();
-    student.setSno(sno);
-    List<UniActivity> activities = mapper.queryMyActivities(student);
+  public List<UniActivity> queryActivitiesSeries(Integer sno, Integer type, Integer genre) {
+    Map<String, Object> map = new HashMap<>();
+    map.put("sno", sno);
+    map.put("type", type);
+    map.put("genre", genre);
+    List<UniActivity> activities = mapper.queryActivitiesSeries(map);
     for (UniActivity activity : activities) {
-      int type = activity.getType();
-      if (type == ActivityType.YIGONG.getName()) {
+      int sType = activity.getType();
+      if (sType == ActivityType.YIGONG.getName()) {
         activity.setSType("义工");
-      } else if (type == ActivityType.SUTUO.getName()) {
+      } else if (sType == ActivityType.SUTUO.getName()) {
         activity.setSType("素拓");
       }
-      int genre = activity.getGenre();
-      if (genre == ActivityGenre.GONGYI.getName()) {
+      int sGenre = activity.getGenre();
+      if (sGenre == ActivityGenre.GONGYI.getName()) {
         activity.setSGenre("公益劳动");
-      } else if (genre == ActivityGenre.BISAI.getName()) {
+      } else if (sGenre == ActivityGenre.BISAI.getName()) {
         activity.setSGenre("比赛竞赛");
       }
     }

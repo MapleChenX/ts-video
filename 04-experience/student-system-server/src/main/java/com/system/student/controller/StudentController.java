@@ -1,6 +1,5 @@
 package com.system.student.controller;
 
-import com.system.student.entity.Student;
 import com.system.student.entity.union.UniActivity;
 import com.system.student.entity.union.UniCourse;
 import com.system.student.entity.union.UniScore;
@@ -28,29 +27,40 @@ public class StudentController {
     return service.querySelf(sno);
   }
 
+  /**
+   * 查询学生的课程相关信息
+   * <p>
+   * 只传入 sno：查询该学生所有学期的课程
+   * 只传入 term：查询所有该学期的课程
+   * 传入 sno 和 term：查询该学生该学期的所有课程
+   *
+   * @param sno  学号
+   * @param term 学期
+   */
   @GetMapping("/query/courses")
-  public List<UniCourse> queryMyCourses(@RequestParam("sno") int sno) {
-    return service.queryMyCourses(sno);
-  }
-
-  @GetMapping("/query/courses/by/term")
-  public List<UniCourse> queryMyCoursesByTerm(@RequestParam("sno") int sno, @RequestParam("term") String term) {
-    return service.queryMyCoursesByTerm(sno, term);
+  public List<UniCourse> queryCoursesSeries(
+    @RequestParam(value = "sno", required = false) Integer sno,
+    @RequestParam(value = "term", required = false) String term
+  ) {
+    return service.queryCoursesSeries(sno, term);
   }
 
   @GetMapping("/query/scores")
-  public List<UniScore> queryMyScores(@RequestParam("sno") int sno) {
-    return service.queryMyScores(sno);
-  }
-
-  @GetMapping("/query/scores/by/term")
-  public List<UniScore> queryMyScoresByTerm(@RequestParam("sno") int sno, @RequestParam("term") String term) {
-    return service.queryMyScoresByTerm(sno, term);
+  public List<UniScore> queryScoresSeries(
+    @RequestParam(value = "sno", required = false) Integer sno,
+    @RequestParam(value = "term", required = false) String term
+  ) {
+    return service.queryScoresSeries(sno, term);
   }
 
   @GetMapping("/query/activities")
-  public List<UniActivity> queryMyActivities(@RequestParam("sno") int sno) {
-    return service.queryMyActivities(sno);
+  public List<UniActivity> queryActivitiesSeries(
+    @RequestParam(value = "sno", required = false) Integer sno,
+    @RequestParam(value = "type", required = false) Integer type,
+    @RequestParam(value = "genre", required = false) Integer genre
+  ) {
+    System.out.println("sno = " + sno + ", type = " + type + ", genre = " + genre);
+    return service.queryActivitiesSeries(sno, type, genre);
   }
 
 }

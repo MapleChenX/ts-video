@@ -13,16 +13,12 @@ import java.util.Map;
 @Mapper
 public interface StudentMapper {
 
-  UniStudent queryMyself(Student student);
+  UniStudent querySelf(Student student);
 
-  List<UniCourse> queryMyCourses(Student student);
+  List<UniCourse> queryCoursesSeries(Map<String, Object> map);
 
-  List<UniCourse> queryMyCoursesByTerm(Map<String, Object> map);
+  List<UniScore> queryScoresSeries(Map<String, Object> map);
 
-  List<UniScore> queryMyScores(Student student);
-
-  List<UniScore> queryMyScoresByTerm(Map<String, Object> map);
-
-  List<UniActivity> queryMyActivities(Student student);
+  List<UniActivity> queryActivitiesSeries(Map<String, Object> map);
 
 }

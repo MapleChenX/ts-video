@@ -32,82 +32,100 @@
     WHERE s.sno = #{sno}
   </select>
 
-  <resultMap id="mapOfQueryMyCourses" type="UniCourse" autoMapping="true">
-    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
-    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
-  </resultMap>
-  <select id="queryMyCourses" resultMap="mapOfQueryMyCourses" parameterType="Student">
-    SELECT sc.term,
-           sc.stu_id,
-           c.name     c_name,
-           c.property c_property,
-           c.credit   c_credit,
-           t.name     t_name
-    FROM `stu_course` AS sc
-           JOIN `courses` AS c ON sc.course_id = c.cno
-           JOIN `teachers` AS t ON sc.teacher_id = t.tno
-    WHERE sc.stu_id = #{sno}
-  </select>
-
-  <resultMap id="mapOfQueryMyCoursesByTerm" type="UniCourse" extends="mapOfQueryMyCourses"/>
-  <select id="queryMyCoursesByTerm" resultMap="mapOfQueryMyCoursesByTerm" parameterType="map">
-    SELECT sc.term,
-           sc.stu_id,
-           c.name     c_name,
-           c.property c_property,
-           c.credit   c_credit,
-           t.name     t_name
-    FROM `stu_course` AS sc
-           JOIN `courses` AS c ON sc.course_id = c.cno
-           JOIN `teachers` AS t ON sc.teacher_id = t.tno
-    WHERE sc.stu_id = #{sno}
-      AND sc.term = #{term}
-  </select>
-
-  <resultMap id="mapOfQueryMyScores" type="UniScore" autoMapping="true">
-    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
-    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
-  </resultMap>
-  <sql id="queryMyScoresSql">
+  <sql id="com_sql_1">
+    <where>
+      <choose>
+        <when test="sno != null and term == null">
+          AND ${filed}.stu_id = #{sno}
+        </when>
+        <when test="term != null and sno == null">
+          AND ${filed}.term = #{term}
+        </when>
+        <when test="sno != null and term != null">
+          AND ${filed}.stu_id = #{sno}
+          AND ${filed}.term = #{term}
+        </when>
+        <when test="sno == null and term == null">
+          and 1 = 1
+        </when>
+      </choose>
+    </where>
   </sql>
-  <select id="queryMyScores" resultMap="mapOfQueryMyScores" parameterType="Student">
-    SELECT scs.term,
-           scs.score,
-           scs.stu_id,
-           c.name     c_name,
-           c.cno      c_cno,
-           c.property c_property,
-           c.credit   c_credit,
-           t.name     t_name
-    FROM `stu_course_score` AS scs
-           JOIN `courses` AS c ON scs.course_id = c.cno
-           JOIN `teachers` AS t ON scs.teacher_id = t.tno
-    where scs.stu_id = #{sno}
+
+  <!-- 查询课程相关信息 -->
+  <resultMap id="mapOfQueryCoursesSeries" type="UniCourse" autoMapping="true">
+    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
+    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
+  </resultMap>
+  <select id="queryCoursesSeries" resultMap="mapOfQueryCoursesSeries" parameterType="map">
+    SELECT sc.term,
+    sc.stu_id,
+    c.name c_name,
+    c.property c_property,
+    c.credit c_credit,
+    t.name t_name
+    FROM `stu_course` AS sc
+    JOIN `courses` AS c ON sc.course_id = c.cno
+    JOIN `teachers` AS t ON sc.teacher_id = t.tno
+    <include refid="com_sql_1">
+      <property name="filed" value="sc"/>
+    </include>
   </select>
 
-  <resultMap id="mapOfQueryMyScoresByTerm" type="UniScore" extends="mapOfQueryMyScores"/>
-  <select id="queryMyScoresByTerm" resultMap="mapOfQueryMyScoresByTerm" parameterType="map">
+  <!-- 查询课程成绩相关信息 -->
+  <resultMap id="mapOfQueryScoresSeries" type="UniScore" autoMapping="true">
+    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
+    <association property="teacher" javaType="Teacher" columnPrefix="t_" autoMapping="true"/>
+  </resultMap>
+  <select id="queryScoresSeries" resultMap="mapOfQueryScoresSeries" parameterType="map">
     SELECT scs.term,
-           scs.score,
-           scs.stu_id,
-           c.name     c_name,
-           c.cno      c_cno,
-           c.property c_property,
-           c.credit   c_credit,
-           t.name     t_name
+    scs.score,
+    scs.stu_id,
+    c.name c_name,
+    c.cno c_cno,
+    c.property c_property,
+    c.credit c_credit,
+    t.name t_name
     FROM `stu_course_score` AS scs
-           JOIN `courses` AS c ON scs.course_id = c.cno
-           JOIN `teachers` AS t ON scs.teacher_id = t.tno
-    WHERE scs.stu_id = #{sno}
-      AND scs.term = #{term}
+    JOIN `courses` AS c ON scs.course_id = c.cno
+    JOIN `teachers` AS t ON scs.teacher_id = t.tno
+    <include refid="com_sql_1">
+      <property name="filed" value="scs"/>
+    </include>
   </select>
 
-  <resultMap id="mapOfQueryMyActivities" type="UniActivity" autoMapping="true"/>
-  <select id="queryMyActivities" resultMap="mapOfQueryMyActivities" parameterType="Student">
+  <!--  查询活动相关信息 -->
+  <resultMap id="mapOfQueryActivitiesSeries" type="UniActivity" autoMapping="true"/>
+  <select id="queryActivitiesSeries" resultMap="mapOfQueryActivitiesSeries" parameterType="map">
     SELECT *
-    FROM stu_acti AS sa
-           JOIN activities as ac ON sa.act_id = ac.eno
-    WHERE sa.stu_id = #{sno}
+    FROM `stu_acti` AS sa
+    JOIN `activities` as ac ON sa.act_id = ac.eno
+    <where>
+      <choose>
+        <when test="sno != null and type == null and genre == null">
+          and sa.stu_id = #{sno}
+        </when>
+        <when test="sno != null and type != null and genre == null">
+          and sa.stu_id = #{sno}
+          and ac.type = #{type}
+        </when>
+        <when test="sno != null and type == null and genre != null">
+          and sa.stu_id = #{sno}
+          and ac.genre = #{genre}
+        </when>
+        <when test="sno == null and type != null and genre == null">
+          and ac.type = #{type}
+        </when>
+        <when test="sno == null and type == null and genre != null">
+          and ac.genre = #{genre}
+        </when>
+        <when test="sno != null and type != null and genre != null">
+          and ac.type = #{type}
+          and ac.genre = #{genre}
+          and sa.stu_id = #{sno}
+        </when>
+      </choose>
+    </where>
   </select>
 
 </mapper>
