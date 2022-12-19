@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/tch")
 public class TeacherController {
@@ -28,12 +29,11 @@ public class TeacherController {
 
   @PostMapping("/update/course/score")
   public Result updateStuCourseScore(
-    @RequestParam(value = "score", required = false) Double score,
-    @RequestParam(value = "sno", required = false) Integer sno,
-    @RequestParam(value = "teacherId", required = false) Integer teacherId,
-    @RequestParam(value = "term", required = false) String term,
-    @RequestParam(value = "courseId", required = false) Integer courseId
+    @RequestParam("score") Double score,
+    @RequestParam("sno") Integer sno, @RequestParam("teacherId") Integer teacherId,
+    @RequestParam("term") String term, @RequestParam("courseId") Integer courseId
   ) {
     return service.updateStuCourseScore(score, sno, teacherId, term, courseId);
   }
+
 }

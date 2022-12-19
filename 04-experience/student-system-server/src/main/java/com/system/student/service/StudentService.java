@@ -8,6 +8,7 @@ import com.system.student.entity.union.UniStudent;
 import com.system.student.enums.ActivityGenre;
 import com.system.student.enums.ActivityType;
 import com.system.student.mapper.StudentMapper;
+import com.system.student.utils.Result;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,39 +24,34 @@ public class StudentService {
     this.mapper = mapper;
   }
 
-  public UniStudent querySelf(int sno) {
-    Student student = new Student();
-    student.setSno(sno);
-    return mapper.querySelf(student);
+  public UniStudent querySelf(Map<String, Object> map) {
+    return mapper.querySelf(map);
   }
 
-  public List<UniCourse> queryCoursesSeries(Integer sno, String term) {
-    Map<String, Object> map = new HashMap<>();
-    map.put("sno", sno);
-    map.put("term", term);
+  public Result updateSelf(Map<String, Object> map) {
+    Result result = new Result();
+    try {
+      Integer code = mapper.updateSelf(map);
+      if (code >= 0) {
+        result.setCode(200);
+      } else {
+        result.setCode(500);
+      }
+    } catch (Exception e) {
+      result.setCode(500);
+    }
+    return result;
+  }
+
+  public List<UniCourse> queryCoursesSeries(Map<String, Object> map) {
     return mapper.queryCoursesSeries(map);
   }
 
-  public List<UniScore> queryScoresSeries(Integer sno, String term, Integer less, Integer more) {
-    Map<String, Object> map = new HashMap<>();
-    map.put("sno", sno);
-    map.put("term", term);
-    map.put("less", less);
-    map.put("more", more);
+  public List<UniScore> queryScoresSeries(Map<String, Object> map) {
     return mapper.queryScoresSeries(map);
   }
 
-  public List<UniActivity> queryActsSeries(
-    Integer sno, Integer type, Integer genre,
-    String term, Double less, Double more
-  ) {
-    Map<String, Object> map = new HashMap<>();
-    map.put("sno", sno);
-    map.put("type", type);
-    map.put("genre", genre);
-    map.put("term", term);
-    map.put("less", less);
-    map.put("more", more);
+  public List<UniActivity> queryActsSeries(Map<String, Object> map) {
     List<UniActivity> activities = mapper.queryActsSeries(map);
     for (UniActivity activity : activities) {
       int sType = activity.getType();

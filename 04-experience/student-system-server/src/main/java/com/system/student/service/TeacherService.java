@@ -39,10 +39,14 @@ public class TeacherService {
     map.put("courseId", courseId);
     map.put("term", term);
     map.put("teacherId", teacherId);
-    System.out.println("score = " + score + ", sno = " + sno + ", courseId = " + courseId + ", term = " + term + ", teacherId = " + teacherId);
-    Integer t = mapper.updateStuCourseScore(map);
-    System.out.println(t);
-    return new Result(200);
+    Integer code = mapper.updateStuCourseScore(map);
+    Result result = new Result();
+    if (code >= 1) {
+      result.setCode(200);
+    } else {
+      result.setCode(500);
+    }
+    return result;
   }
 
 }

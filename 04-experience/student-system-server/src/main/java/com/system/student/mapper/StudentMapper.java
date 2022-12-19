@@ -13,7 +13,9 @@ import java.util.Map;
 @Mapper
 public interface StudentMapper {
 
-  UniStudent querySelf(Student student);
+  UniStudent querySelf(Map<String, Object> map);
+
+  Integer updateSelf(Map<String, Object> map);
 
   List<UniCourse> queryCoursesSeries(Map<String, Object> map);
 
