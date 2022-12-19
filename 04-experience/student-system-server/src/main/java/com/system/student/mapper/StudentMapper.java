@@ -19,6 +19,6 @@ public interface StudentMapper {
 
   List<UniScore> queryScoresSeries(Map<String, Object> map);
 
-  List<UniActivity> queryActivitiesSeries(Map<String, Object> map);
+  List<UniActivity> queryActsSeries(Map<String, Object> map);
 
 }

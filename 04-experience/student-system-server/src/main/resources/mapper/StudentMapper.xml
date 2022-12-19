@@ -34,18 +34,18 @@
 
   <sql id="com_sql_1">
     <where>
-      <choose>
-        <when test="sno != null and term == null">
-          AND ${filed}.stu_id = #{sno}
-        </when>
-        <when test="term != null and sno == null">
-          AND ${filed}.term = #{term}
-        </when>
-        <when test="sno != null and term != null">
-          AND ${filed}.stu_id = #{sno}
-          AND ${filed}.term = #{term}
-        </when>
-      </choose>
+      <if test="sno != null">
+        AND ${filed}.stu_id = #{sno}
+      </if>
+      <if test="term != null">
+        AND ${filed}.term = #{term}
+      </if>
+      <if test="less != null">
+        AND #{less} >= scs.score
+      </if>
+      <if test="more != null">
+        AND scs.score >= #{more}
+      </if>
     </where>
   </sql>
 
@@ -92,36 +92,30 @@
   </select>
 
   <!--  查询活动相关信息 -->
-  <resultMap id="mapOfQueryActivitiesSeries" type="UniActivity" autoMapping="true"/>
-  <select id="queryActivitiesSeries" resultMap="mapOfQueryActivitiesSeries" parameterType="map">
+  <resultMap id="mapOfQueryActsSeries" type="UniActivity" autoMapping="true"/>
+  <select id="queryActsSeries" resultMap="mapOfQueryActsSeries" parameterType="map">
     SELECT *
     FROM `stu_acti` AS sa
     JOIN `activities` as ac ON sa.act_id = ac.eno
     <where>
-      <choose>
-        <when test="sno != null and type == null and genre == null">
-          and sa.stu_id = #{sno}
-        </when>
-        <when test="sno != null and type != null and genre == null">
-          and sa.stu_id = #{sno}
-          and ac.type = #{type}
-        </when>
-        <when test="sno != null and type == null and genre != null">
-          and sa.stu_id = #{sno}
-          and ac.genre = #{genre}
-        </when>
-        <when test="sno == null and type != null and genre == null">
-          and ac.type = #{type}
-        </when>
-        <when test="sno == null and type == null and genre != null">
-          and ac.genre = #{genre}
-        </when>
-        <when test="sno != null and type != null and genre != null">
-          and ac.type = #{type}
-          and ac.genre = #{genre}
-          and sa.stu_id = #{sno}
-        </when>
-      </choose>
+      <if test="sno != null">
+        and sa.stu_id = #{sno}
+      </if>
+      <if test="type != null">
+        and ac.type = #{type}
+      </if>
+      <if test="genre != null">
+        and ac.genre = #{genre}
+      </if>
+      <if test="term != null">
+        and sa.term = #{term}
+      </if>
+      <if test="less != null">
+        and #{less} >= sa.score
+      </if>
+      <if test="more != null">
+        and sa.score >= #{more}
+      </if>
     </where>
   </select>
 

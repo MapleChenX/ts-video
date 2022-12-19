@@ -36,19 +36,27 @@ public class StudentService {
     return mapper.queryCoursesSeries(map);
   }
 
-  public List<UniScore> queryScoresSeries(Integer sno, String term) {
+  public List<UniScore> queryScoresSeries(Integer sno, String term, Integer less, Integer more) {
     Map<String, Object> map = new HashMap<>();
     map.put("sno", sno);
     map.put("term", term);
+    map.put("less", less);
+    map.put("more", more);
     return mapper.queryScoresSeries(map);
   }
 
-  public List<UniActivity> queryActivitiesSeries(Integer sno, Integer type, Integer genre) {
+  public List<UniActivity> queryActsSeries(
+    Integer sno, Integer type, Integer genre,
+    String term, Double less, Double more
+  ) {
     Map<String, Object> map = new HashMap<>();
     map.put("sno", sno);
     map.put("type", type);
     map.put("genre", genre);
-    List<UniActivity> activities = mapper.queryActivitiesSeries(map);
+    map.put("term", term);
+    map.put("less", less);
+    map.put("more", more);
+    List<UniActivity> activities = mapper.queryActsSeries(map);
     for (UniActivity activity : activities) {
       int sType = activity.getType();
       if (sType == ActivityType.YIGONG.getName()) {
