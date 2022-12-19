@@ -1,6 +1,5 @@
 package com.system.student.service;
 
-import com.system.student.entity.Student;
 import com.system.student.entity.union.UniActivity;
 import com.system.student.entity.union.UniCourse;
 import com.system.student.entity.union.UniScore;
@@ -11,7 +10,6 @@ import com.system.student.mapper.StudentMapper;
 import com.system.student.utils.Result;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

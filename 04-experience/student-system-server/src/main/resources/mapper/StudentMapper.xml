@@ -5,13 +5,13 @@
 
 <mapper namespace="com.system.student.mapper.StudentMapper">
 
-  <resultMap id="mapOfQueryMyself" type="UniStudent" autoMapping="true">
+  <resultMap id="mapOfQuerySelf" type="UniStudent" autoMapping="true">
     <association property="student" javaType="Student" autoMapping="true"/>
     <association property="college" columnPrefix="c_" javaType="College" autoMapping="true"/>
     <association property="profession" columnPrefix="p_" javaType="Profession" autoMapping="true"/>
     <association property="grade" columnPrefix="g_" javaType="Grade" autoMapping="true"/>
   </resultMap>
-  <select id="queryMyself" resultMap="mapOfQueryMyself" parameterType="Student">
+  <select id="querySelf" resultMap="mapOfQuerySelf" parameterType="map">
     SELECT s.*,
            c.cno     c_cno,
            c.name    c_name,
@@ -31,6 +31,16 @@
            JOIN `professions` as p on p.pno = s.profession_id
     WHERE s.sno = #{sno}
   </select>
+
+  <update id="updateSelf" parameterType="map">
+    UPDATE `students`
+    SET now_addr  = #{nowAddr},
+        qq        = #{qq},
+        phone     = #{phone},
+        bank_name = #{bankName},
+        bank_no   = #{bankNo}
+    WHERE sno = #{sno}
+  </update>
 
   <sql id="com_sql_1">
     <where>

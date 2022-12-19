@@ -1,5 +1,12 @@
 <script setup>
 import { Menu as IconMenu, Setting, Guide } from "@element-plus/icons-vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function route(path) {
+  router.push(path);
+}
 </script>
 
 <template>
@@ -16,9 +23,9 @@ import { Menu as IconMenu, Setting, Guide } from "@element-plus/icons-vue";
                 </el-icon>
                 智能教学
               </template>
-              <el-menu-item index="1-1">我的课程</el-menu-item>
-              <el-menu-item index="1-2">课程成绩</el-menu-item>
-              <el-menu-item index="1-3">我的信息</el-menu-item>
+              <el-menu-item index="1-1" @click="route('/stu/course')">我的课程</el-menu-item>
+              <el-menu-item index="1-2" @click="route('/stu/course/score')">课程成绩</el-menu-item>
+              <el-menu-item index="1-3" @click="route('/stu/self')">我的信息</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
               <template #title>
