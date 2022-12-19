@@ -5,6 +5,47 @@
 
 <mapper namespace="com.system.student.mapper.TeacherMapper">
 
+  <!-- 通过课程名称和老师ID查询所有学生 -->
+  <resultMap id="mapOfQueryCoursesSeries" type="UniCourseStu" autoMapping="true">
+    <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
+    <association property="source" javaType="UniStudent" autoMapping="true">
+      <association property="student" javaType="Student" columnPrefix="s_" autoMapping="true"/>
+      <association property="profession" javaType="Profession" columnPrefix="p_" autoMapping="true"/>
+      <association property="grade" javaType="Grade" columnPrefix="g_" autoMapping="true"/>
+    </association>
+  </resultMap>
+  <select id="queryStuCourse" resultMap="mapOfQueryCoursesSeries" parameterType="map">
+    SELECT
+    sc.stu_id, sc.course_id, sc.teacher_id, sc.term,
+    c.name c_name, c.cno c_cno,
+    s.sno s_sno, s.sex s_sex, s.stu_type s_stu_type, s.name s_name,
+    p.name p_name, g.name g_name,
+    g.layer g_layer, g.grade g_grade
+    FROM `stu_course` AS sc
+    JOIN `courses` AS c ON sc.course_id = c.cno
+    JOIN `students` AS s ON sc.stu_id = s.sno
+    JOIN `professions` AS p ON s.profession_id = p.pno
+    JOIN `grades` AS g ON s.grade_id = g.gno
+    <where>
+      <if test="teacherId != null">
+        AND sc.`teacher_id` = #{teacherId}
+      </if>
+      <if test="term != null">
+        AND sc.`term` = #{term}
+      </if>
+      <if test="name != null">
+        AND c.`name` = #{name}
+      </if>
+    </where>
+  </select>
 
+  <update id="updateStuCourseScore" parameterType="map">
+    UPDATE `stu_course_score`
+    SET score = #{score}
+    WHERE stu_id = #{sno}
+      AND course_id = #{courseId}
+      AND term = #{term}
+      AND teacher_id = #{teacherId}
+  </update>
 
 </mapper>
