@@ -15,7 +15,7 @@ function route(path) {
     <el-container class="main">
       <el-aside>
         <el-scrollbar>
-          <el-menu :default-openeds="['1', '2']">
+          <el-menu :default-openeds="['1']">
             <el-sub-menu index="1">
               <template #title>
                 <el-icon>
@@ -25,19 +25,10 @@ function route(path) {
               </template>
               <el-menu-item index="1-1" @click="route('/stu/course')">我的课程</el-menu-item>
               <el-menu-item index="1-2" @click="route('/stu/course/score')">课程成绩</el-menu-item>
+              <el-menu-item index="1-4" @click="route('/stu/acts')">我的活动</el-menu-item>
               <el-menu-item index="1-3" @click="route('/stu/self')">我的信息</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
-              <template #title>
-                <el-icon>
-                  <icon-menu />
-                </el-icon>
-                学工业务
-              </template>
-              <el-menu-item index="2-1">我的素拓</el-menu-item>
-              <el-menu-item index="2-2">我的二课</el-menu-item>
-            </el-sub-menu>
-            <el-sub-menu index="3">
               <template #title>
                 <el-icon>
                   <setting />

@@ -33,3 +33,11 @@ export function updateSelf(data, success, error) {
     error(err);
   });
 }
+
+export function getActs(data, success, error) {
+  axios.post(`/query/acts`, data).then(res => {
+    success(res);
+  }).catch(err => {
+    error(err);
+  });
+}

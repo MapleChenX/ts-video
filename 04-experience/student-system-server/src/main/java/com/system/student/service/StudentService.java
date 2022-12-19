@@ -53,8 +53,8 @@ public class StudentService {
     List<UniActivity> activities = mapper.queryActsSeries(map);
     for (UniActivity activity : activities) {
       int sType = activity.getType();
-      if (sType == ActivityType.YIGONG.getName()) {
-        activity.setSType("义工");
+      if (sType == ActivityType.ERKE.getName()) {
+        activity.setSType("二课");
       } else if (sType == ActivityType.SUTUO.getName()) {
         activity.setSType("素拓");
       }
