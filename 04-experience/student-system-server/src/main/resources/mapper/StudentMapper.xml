@@ -53,6 +53,12 @@
       <if test="less != null">
         AND #{less} >= scs.score
       </if>
+      <if test="courseId != null">
+        AND scs.course_id = #{courseId}
+      </if>
+      <if test="teacherId != null">
+        AND scs.teacher_id = #{teacherId}
+      </if>
       <if test="more != null">
         AND scs.score >= #{more}
       </if>
@@ -88,11 +94,12 @@
     SELECT scs.term,
     scs.score,
     scs.stu_id,
+    scs.teacher_id,
     c.name c_name,
     c.cno c_cno,
     c.property c_property,
     c.credit c_credit,
-    t.name t_name
+    t.name t_name, t.tno t_tno
     FROM `stu_course_score` AS scs
     JOIN `courses` AS c ON scs.course_id = c.cno
     JOIN `teachers` AS t ON scs.teacher_id = t.tno

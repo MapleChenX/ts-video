@@ -16,5 +16,6 @@ public class UniScore {
   private String term;
   private double score;
   private int stuId;
+  private int teacherId;
 
 }
