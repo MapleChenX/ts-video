@@ -2,29 +2,35 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/stu",
+    path: "/h",
+    component: () => import("./components/Home.vue"),
     children: [
       {
         name: "Course",
-        path: "course",
-        component: () => import("./components/Course.vue")
+        path: "stu/course",
+        component: () => import("./components/student/Course.vue")
       },
       {
         name: "CourseScore",
-        path: "course/score",
-        component: () => import("./components/CourseScore.vue")
+        path: "stu/course/score",
+        component: () => import("./components/student/CourseScore.vue")
       },
       {
         name: "MyInfo",
-        path: "self",
-        component: () => import("./components/MyInfo.vue")
+        path: "stu/self",
+        component: () => import("./components/student/MyInfo.vue")
       },
       {
         name: "MyActs",
-        path: "acts",
-        component: () => import("./components/MyActs.vue")
+        path: "stu/acts",
+        component: () => import("./components/student/MyActs.vue")
       }
     ]
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("./components/Login.vue")
   }
 ];
 

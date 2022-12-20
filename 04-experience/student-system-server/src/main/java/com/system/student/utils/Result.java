@@ -3,6 +3,7 @@ package com.system.student.utils;
 public class Result {
 
   private Integer code;
+  private Object data;
 
   public Result() {
   }
@@ -17,5 +18,13 @@ public class Result {
 
   public void setCode(Integer code) {
     this.code = code;
+  }
+
+  public Object getData() {
+    return data;
+  }
+
+  public void setData(Object data) {
+    this.data = data;
   }
 }

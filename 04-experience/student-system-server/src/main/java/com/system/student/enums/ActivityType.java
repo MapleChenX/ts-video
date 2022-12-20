@@ -2,7 +2,7 @@ package com.system.student.enums;
 
 public enum ActivityType {
 
-  YIGONG(1),
+  ERKE(1),
   SUTUO(2);
 
   private int name;

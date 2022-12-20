@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { Warning, Clock, Aim, Histogram } from "@element-plus/icons-vue";
-import { getSelf, updateSelf } from "../apis/student-api.js";
+import { getSelf, updateSelf } from "../../apis/student-api.js";
 
 let form = ref();
 let student;

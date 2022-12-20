@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { getActs, getCoursesScore } from "../apis/student-api";
+import { getActs, getCoursesScore } from "../../apis/student-api.js";
 
 let form = ref();
 let terms = ref([
