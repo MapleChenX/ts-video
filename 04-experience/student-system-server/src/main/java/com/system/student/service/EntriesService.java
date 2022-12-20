@@ -33,11 +33,11 @@ public class EntriesService {
       else if (isNo) map.put("no", account);
       result.setData(map);
       if (!isEmail && !isPhone && !isNo) {
-        result.setData("账号格式有错");
+        result.setData("账号格式有错！");
         result.setCode(500);
       }
     } else {
-      result.setData("没有输入账号");
+      result.setData("没有输入账号！");
       result.setCode(500);
     }
     return result;
@@ -47,11 +47,16 @@ public class EntriesService {
     Result result = checkAccount(map);
     if (result.getCode() == 200) {
       Student student = mapper.stuLogin((Map<String, Object>) result.getData());
-      result.setData(student);
-      HashMap<String, Object> update = new HashMap<>();
-      update.put("loginDate", Time.format(Time.Pattern.PATT_1));
-      update.put("no", student.getSno());
-      mapper.updateStuLoginDate(update);
+      if (student != null) {
+        result.setData(student);
+        HashMap<String, Object> update = new HashMap<>();
+        update.put("loginDate", Time.format(Time.Pattern.PATT_1));
+        update.put("no", student.getSno());
+        mapper.updateStuLoginDate(update);
+      } else {
+        result.setCode(500);
+        result.setData("密码错误或账号错误！");
+      }
     }
     return result;
   }

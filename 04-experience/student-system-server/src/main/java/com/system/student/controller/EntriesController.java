@@ -1,7 +1,5 @@
 package com.system.student.controller;
 
-import com.system.student.entity.Student;
-import com.system.student.entity.Teacher;
 import com.system.student.service.EntriesService;
 import com.system.student.utils.Result;
 import org.springframework.web.bind.annotation.*;
