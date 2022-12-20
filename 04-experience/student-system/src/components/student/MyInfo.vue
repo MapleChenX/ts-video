@@ -6,8 +6,9 @@ import { getSelf, updateSelf } from "@/apis/student-api.js";
 
 let form = ref();
 let student;
+let item = JSON.parse(localStorage.getItem("user"));
 
-getSelf({ sno: 42020306 }, ({ data }) => {
+getSelf({ sno: item.sno }, ({ data }) => {
   form.value = data;
   student = JSON.parse(JSON.stringify(form.value.student));
 });

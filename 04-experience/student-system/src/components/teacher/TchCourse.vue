@@ -23,13 +23,14 @@ let terms = ref([
   }
 ]);
 let selectedTerm = ref("2022-2023-1");
+let item = JSON.parse(localStorage.getItem("user"));
 
-getCourses({ tno: 20200001, term: selectedTerm.value }, ({ data }) => {
+getCourses({ tno: item.tno, term: selectedTerm.value }, ({ data }) => {
   form.value = data;
 });
 
 watch(selectedTerm, () => {
-  getCourses({ tno: 20200001, term: selectedTerm.value }, ({ data }) => {
+  getCourses({ tno: item.tno, term: selectedTerm.value }, ({ data }) => {
     form.value = data;
   });
 });

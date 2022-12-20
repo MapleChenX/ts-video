@@ -61,10 +61,6 @@ function handleLogin() {
     });
   }
 }
-
-function handleRegister() {
-
-}
 </script>
 
 <template>

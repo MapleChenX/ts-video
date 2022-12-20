@@ -8,6 +8,7 @@ import { getCoursesScore } from "@/apis/student-api";
 const route = useRoute();
 
 let form = ref();
+let item = JSON.parse(localStorage.getItem("user"));
 
 getStuCourses({
   tno: route.query.tno,

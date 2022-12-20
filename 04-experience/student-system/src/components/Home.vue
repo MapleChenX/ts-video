@@ -27,6 +27,14 @@ function logout() {
         <div style="margin-right: 10px" class="flex align-center justify-between items-center">学号：{{ item.sno }}</div>
         <div class="flex align-center justify-between items-center">上次登录：{{ item.loginDate }}</div>
       </div>
+      <div v-if="item.type === 'teacher'"
+           class="flex align-center items-center">
+        <el-avatar style="margin-right: 20px" :size="50" :src="item.avatar" />
+        <div style="margin-right: 10px" class="flex align-center justify-between items-center">姓名：{{ item.name }}
+        </div>
+        <div style="margin-right: 10px" class="flex align-center justify-between items-center">工号：{{ item.tno }}</div>
+        <div class="flex align-center justify-between items-center">上次登录：{{ item.loginDate }}</div>
+      </div>
       <el-button :icon="CaretRight" @click="logout">注销</el-button>
     </el-header>
     <el-container class="main">

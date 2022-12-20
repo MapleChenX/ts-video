@@ -22,13 +22,14 @@ let terms = ref([
   }
 ]);
 let selectedTerm = ref("2022-2023-1");
+let item = JSON.parse(localStorage.getItem("user"));
 
-getActs({ sno: 1 }, ({ data }) => {
+getActs({ sno: item.sno }, ({ data }) => {
   form.value = data;
 });
 
 watch(selectedTerm, () => {
-  getActs({ sno: 1, term: selectedTerm.value }, ({ data }) => {
+  getActs({ sno: item.sno, term: selectedTerm.value }, ({ data }) => {
     form.value = data;
   });
 });
@@ -54,7 +55,7 @@ watch(selectedType, () => {
   if (type === 3) {
     type = null;
   }
-  getActs({ sno: 1, type }, ({ data }) => {
+  getActs({ sno: item.sno, type }, ({ data }) => {
     form.value = data;
   });
 });
@@ -82,7 +83,7 @@ function reQuery() {
     score = null;
   }
   getActs({
-    sno: 42020306, term: selectedTerm.value, [selectedScore.value]: score
+    sno: item.sno, term: selectedTerm.value, [selectedScore.value]: score
   }, ({ data }) => {
     form.value = data;
   });
