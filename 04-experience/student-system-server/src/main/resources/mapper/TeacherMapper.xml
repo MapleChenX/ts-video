@@ -5,6 +5,32 @@
 
 <mapper namespace="com.system.student.mapper.TeacherMapper">
 
+  <resultMap id="mapOfQueryTchCourse" type="UniTchCourse" autoMapping="true">
+    <association property="course" columnPrefix="c_" autoMapping="true"/>
+    <association property="teacher" columnPrefix="t_" autoMapping="true"/>
+    <association property="grade" columnPrefix="g_" autoMapping="true"/>
+  </resultMap>
+  <select id="queryTchCourse" resultMap="mapOfQueryTchCourse" parameterType="map">
+    SELECT
+    tc.term,
+    t.name t_name, t.tno t_tno,
+    c.cno c_cno, c.name c_name, c.property c_property,
+    c.open_unit c_open_unit, c.credit c_credit,
+    g.grade g_grade, g.name g_name, g.layer g_layer, g.gno g_gno
+    FROM tch_course as tc
+    JOIN courses as c on c.cno = tc.course_id
+    JOIN grades as g on g.gno = tc.grade_id
+    JOIN teachers as t on t.tno = tc.teacher_id
+    <where>
+      <if test="tno != null">
+        AND tc.teacher_id = #{tno}
+      </if>
+      <if test="term != null">
+        AND tc.term = #{term}
+      </if>
+    </where>
+  </select>
+
   <!-- 通过课程名称和老师ID查询所有学生 -->
   <resultMap id="mapOfQueryCoursesSeries" type="UniCourseStu" autoMapping="true">
     <association property="course" javaType="Course" columnPrefix="c_" autoMapping="true"/>
@@ -14,27 +40,30 @@
       <association property="grade" javaType="Grade" columnPrefix="g_" autoMapping="true"/>
     </association>
   </resultMap>
-  <select id="queryStuCourse" resultMap="mapOfQueryCoursesSeries" parameterType="map">
+  <select id="queryTchStuCourse" resultMap="mapOfQueryCoursesSeries" parameterType="map">
     SELECT
     sc.stu_id, sc.course_id, sc.teacher_id, sc.term,
     c.name c_name, c.cno c_cno,
     s.sno s_sno, s.sex s_sex, s.stu_type s_stu_type, s.name s_name,
     p.name p_name, g.name g_name,
-    g.layer g_layer, g.grade g_grade
+    g.layer g_layer, g.grade g_grade, g.gno g_gno
     FROM `stu_course` AS sc
     JOIN `courses` AS c ON sc.course_id = c.cno
     JOIN `students` AS s ON sc.stu_id = s.sno
     JOIN `professions` AS p ON s.profession_id = p.pno
     JOIN `grades` AS g ON s.grade_id = g.gno
     <where>
-      <if test="teacherId != null">
-        AND sc.`teacher_id` = #{teacherId}
+      <if test="tno != null">
+        AND sc.`teacher_id` = #{tno}
       </if>
       <if test="term != null">
         AND sc.`term` = #{term}
       </if>
       <if test="name != null">
         AND c.`name` = #{name}
+      </if>
+      <if test="gno != null">
+        AND g.gno = #{gno}
       </if>
     </where>
   </select>
@@ -45,7 +74,7 @@
     WHERE stu_id = #{sno}
       AND course_id = #{courseId}
       AND term = #{term}
-      AND teacher_id = #{teacherId}
+      AND teacher_id = #{tno}
   </update>
 
 </mapper>

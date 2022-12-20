@@ -25,11 +25,9 @@ function route(path) {
               </template>
               <el-menu-item index="1-1" @click="route('/h/stu/course')">我的课程</el-menu-item>
               <el-menu-item index="1-2" @click="route('/h/stu/course/score')">课程成绩</el-menu-item>
-              <el-menu-item index="1-4" @click="route('/h/stu/acts')">我的活动</el-menu-item>
-              <el-menu-item index="1-3" @click="route('/h/stu/self')">我的信息</el-menu-item>
-              <el-menu-item>我教的课程</el-menu-item>
-              <el-menu-item>录入课程成绩</el-menu-item>
-              <el-menu-item>我的信息</el-menu-item>
+              <el-menu-item index="1-3" @click="route('/h/stu/acts')">我的活动</el-menu-item>
+              <el-menu-item index="1-4" @click="route('/h/stu/self')">我的信息</el-menu-item>
+              <el-menu-item index="1-5" @click="route('/h/tch/course')">教的课程</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
               <template #title>
