@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { getActs, getCoursesScore } from "../../apis/student-api.js";
+import { getActs, getCoursesScore } from "@/apis/student-api.js";
 
 let form = ref();
 let terms = ref([
@@ -82,7 +82,7 @@ function reQuery() {
     score = null;
   }
   getActs({
-    sno: 1, term: selectedTerm.value, [selectedScore.value]: score
+    sno: 42020306, term: selectedTerm.value, [selectedScore.value]: score
   }, ({ data }) => {
     form.value = data;
   });

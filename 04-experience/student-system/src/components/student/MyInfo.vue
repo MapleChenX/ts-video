@@ -2,12 +2,12 @@
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { Warning, Clock, Aim, Histogram } from "@element-plus/icons-vue";
-import { getSelf, updateSelf } from "../../apis/student-api.js";
+import { getSelf, updateSelf } from "@/apis/student-api.js";
 
 let form = ref();
 let student;
 
-getSelf({ sno: 1 }, ({ data }) => {
+getSelf({ sno: 42020306 }, ({ data }) => {
   form.value = data;
   student = JSON.parse(JSON.stringify(form.value.student));
 });

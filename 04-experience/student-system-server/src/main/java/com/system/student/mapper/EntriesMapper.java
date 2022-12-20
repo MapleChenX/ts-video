@@ -13,4 +13,8 @@ public interface EntriesMapper {
 
   Teacher tchLogin(Map<String, Object> map);
 
+  void updateTechLoginDate(Map<String, Object> map);
+
+  void updateStuLoginDate(Map<String, Object> map);
+
 }

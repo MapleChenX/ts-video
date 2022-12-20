@@ -6,7 +6,7 @@
 <mapper namespace="com.system.student.mapper.EntriesMapper">
 
   <select id="stuLogin" resultType="Student">
-    SELECT *
+    SELECT sno, sex, phone, avatar, qq, email, password, login_date, grade_id, college_id, profession_id, name
     FROM students
     <where>
       <if test="password != null">
@@ -30,7 +30,7 @@
   </select>
 
   <select id="tchLogin" resultType="Teacher">
-    SELECT *
+    SELECT tno, sex, login_date, phone, avatar, qq, email, password, name
     FROM teachers
     <where>
       <if test="password != null">
@@ -52,5 +52,25 @@
       </choose>
     </where>
   </select>
+
+  <sql id="com_sql_1">
+    UPDATE ${tablename}
+    SET login_date = #{loginDate}
+    WHERE ${no} = #{no};
+  </sql>
+
+  <update id="updateTechLoginDate">
+    <include refid="com_sql_1">
+      <property name="tablename" value="teachers"/>
+      <property name="no" value="tno"/>
+    </include>
+  </update>
+
+  <update id="updateStuLoginDate">
+    <include refid="com_sql_1">
+      <property name="tablename" value="students"/>
+      <property name="no" value="sno"/>
+    </include>
+  </update>
 
 </mapper>

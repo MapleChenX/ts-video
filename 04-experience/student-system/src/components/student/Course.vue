@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { getCourses } from "../../apis/student-api.js";
+import { getCourses } from "@/apis/student-api.js";
 
 let form = ref();
 let terms = ref([
@@ -23,12 +23,12 @@ let terms = ref([
 ]);
 let selectedTerm = ref("2022-2023-1");
 
-getCourses({ sno: 1, term: selectedTerm.value }, ({ data }) => {
+getCourses({ sno: 42020306, term: selectedTerm.value }, ({ data }) => {
   form.value = data;
 });
 
 watch(selectedTerm, () => {
-  getCourses({ sno: 1, term: selectedTerm.value }, ({ data }) => {
+  getCourses({ sno: 42020306, term: selectedTerm.value }, ({ data }) => {
     form.value = data;
   });
 });

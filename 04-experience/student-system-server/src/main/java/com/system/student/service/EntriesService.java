@@ -3,9 +3,11 @@ package com.system.student.service;
 import com.system.student.entity.Student;
 import com.system.student.entity.Teacher;
 import com.system.student.mapper.EntriesMapper;
+import com.system.student.utils.Time;
 import com.system.student.utils.Result;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -17,7 +19,7 @@ public class EntriesService {
     this.mapper = mapper;
   }
 
-  private Result check(Map<String, Object> map) {
+  private Result checkAccount(Map<String, Object> map) {
     Result result = new Result();
     Object password = map.get("password");
     Object account = map.get("account");
@@ -42,19 +44,27 @@ public class EntriesService {
   }
 
   public Result stuLogin(Map<String, Object> map) {
-    Result result = check(map);
+    Result result = checkAccount(map);
     if (result.getCode() == 200) {
       Student student = mapper.stuLogin((Map<String, Object>) result.getData());
       result.setData(student);
+      HashMap<String, Object> update = new HashMap<>();
+      update.put("loginDate", Time.format(Time.Pattern.PATT_1));
+      update.put("no", student.getSno());
+      mapper.updateStuLoginDate(update);
     }
     return result;
   }
 
   public Result tchLogin(Map<String, Object> map) {
-    Result result = check(map);
+    Result result = checkAccount(map);
     if (result.getCode() == 200) {
       Teacher teacher = mapper.tchLogin((Map<String, Object>) result.getData());
       result.setData(teacher);
+      HashMap<String, Object> update = new HashMap<>();
+      update.put("loginDate", Time.format(Time.Pattern.PATT_1));
+      update.put("no", teacher.getTno());
+      mapper.updateTechLoginDate(update);
     }
     return result;
   }

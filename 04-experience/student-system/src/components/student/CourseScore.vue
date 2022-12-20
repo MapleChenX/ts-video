@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { getCoursesScore } from "../../apis/student-api.js";
+import { getCoursesScore } from "@/apis/student-api.js";
 
 let form = ref();
 let terms = ref([
@@ -23,12 +23,12 @@ let terms = ref([
 ]);
 let selectedTerm = ref("2022-2023-1");
 
-getCoursesScore({ sno: 1, term: selectedTerm.value }, ({ data }) => {
+getCoursesScore({ sno: 42020306, term: selectedTerm.value }, ({ data }) => {
   form.value = data;
 });
 
 watch(selectedTerm, () => {
-  getCoursesScore({ sno: 1, term: selectedTerm.value }, ({ data }) => {
+  getCoursesScore({ sno: 42020306, term: selectedTerm.value }, ({ data }) => {
     form.value = data;
   });
 });
@@ -56,7 +56,7 @@ function reQuery() {
     score = null;
   }
   getCoursesScore({
-    sno: 1, term: selectedTerm.value, [selectedScore.value]: score
+    sno: 42020306, term: selectedTerm.value, [selectedScore.value]: score
   }, ({ data }) => {
     form.value = data;
   });
