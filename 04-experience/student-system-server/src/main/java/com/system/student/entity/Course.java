@@ -15,7 +15,7 @@ public class Course {
   private String enName;
   private String range;
   private String property;
-  private int credit;
+  private double credit;
   private String openUnit;
   private String intro;
 
