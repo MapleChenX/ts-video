@@ -24,7 +24,7 @@ let terms = ref([
 let selectedTerm = ref("2022-2023-1");
 let item = JSON.parse(localStorage.getItem("user"));
 
-getActs({ sno: item.sno }, ({ data }) => {
+getActs({ sno: item.sno, term: selectedTerm.value }, ({ data }) => {
   form.value = data;
 });
 
