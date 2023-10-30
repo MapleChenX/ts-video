@@ -13,7 +13,9 @@ class ApplicationTests {
     @Test
     void contextLoads() {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", "E:\\Type Files\\Videos\\Captures\\香子兰 .mp4", "-c:v", "libx264", "-hls_time", "60", "-hls_list_size", "0", "-c:a", "aac", "-strict", "-2", "-f", "hls", "E:\\Type Files\\Videos\\Captures\\香子兰 .m3u8");
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", "E:/Type Files/Videos/Captures/videos/QQ20231031-2497.mp4",
+                    "-c:v", "libx264", "-hls_time", "60", "-hls_list_size", "0", "-c:a", "aac", "-strict", "-2", "-f", "hls",
+                    "E:/Type Files/Videos/Captures/m3u8s/QQ20231031-2497.m3u8");
             processBuilder.redirectErrorStream(true); // Merge error and output streams
 
             Process process = processBuilder.start();

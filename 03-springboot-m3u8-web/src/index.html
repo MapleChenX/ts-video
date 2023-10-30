@@ -11,7 +11,8 @@
     <script>
       var video = document.getElementById("video");
       var videoSrc =
-        "http://localhost:8080/video/m3u8?filepath=E:/Type Files/Videos/Captures&filename=香子兰 .m3u8";
+        "http://localhost:8080/video/m3u8?filepath=E:/Type Files/Videos/Captures/m3u8s&filename=视频.m3u8";
+
       if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = videoSrc;
       } else if (Hls.isSupported()) {
