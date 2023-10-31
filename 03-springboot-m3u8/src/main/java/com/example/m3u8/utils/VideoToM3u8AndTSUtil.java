@@ -1,4 +1,4 @@
-package com.example.m3u8;
+package com.example.m3u8.utils;
 
 import java.io.*;
 
@@ -10,7 +10,7 @@ import java.io.*;
  */
 public class VideoToM3u8AndTSUtil {
 
-    public static String getRealname(String filename) {
+    public static String getFilenameWithoutSuffix(String filename) {
         int lastDotIndex = filename.lastIndexOf(".");
         if (lastDotIndex > 0) {
             return filename.substring(0, lastDotIndex);
@@ -19,17 +19,10 @@ public class VideoToM3u8AndTSUtil {
         }
     }
 
-    /**
-     * @param filename 文件名称
-     */
-    public static String convert(String filename) {
+    public static boolean convert(String srcPathname, String destPathname) {
         try {
-            String src = "E:/Type Files/Videos/Captures/videos/" + filename;
-            String realname = getRealname(filename);
-            String dest = "E:/Type Files/Videos/Captures/m3u8s/" + realname + ".m3u8";
-
-            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", src, "-c:v", "libx264", "-hls_time", "60",
-                    "-hls_list_size", "0", "-c:a", "aac", "-strict", "-2", "-f", "hls", dest);
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", srcPathname, "-c:v", "libx264", "-hls_time", "60",
+                    "-hls_list_size", "0", "-c:a", "aac", "-strict", "-2", "-f", "hls", destPathname);
             processBuilder.redirectErrorStream(true);
 
             Process process = processBuilder.start();
@@ -41,10 +34,10 @@ public class VideoToM3u8AndTSUtil {
 
             int exitCode = process.waitFor();
             System.out.println("FFmpeg process exited with code: " + exitCode);
-            return "http://localhost:8080/video/m3u8?filepath=" + "E:/Type Files/Videos/Captures/m3u8s" + "&filename=" + realname + ".m3u8";
+            return true;
         } catch (IOException | InterruptedException e) {
             e.fillInStackTrace();
-            return null;
+            return false;
         }
     }
 

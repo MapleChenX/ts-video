@@ -1,5 +1,6 @@
-package com.example.m3u8;
+package com.example.m3u8.controller;
 
+import com.example.m3u8.utils.VideoToM3u8AndTSUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +33,22 @@ public class VideoController {
         }
 
         try {
-            boolean writeSuccess = VideoToM3u8AndTSUtil.write(file.getInputStream(), "E:/Type Files/Videos/Captures/videos/", file.getOriginalFilename());
-            if (!writeSuccess) {
+
+            boolean written = VideoToM3u8AndTSUtil.write(file.getInputStream(), "E:/Type Files/Videos/Captures/videos/", file.getOriginalFilename());
+            if (!written) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
 
-            String dest = VideoToM3u8AndTSUtil.convert( Objects.requireNonNull(file.getOriginalFilename()));
-            return ResponseEntity.ok(dest);
+            String srcPathname = "E:/Type Files/Videos/Captures/videos/" + file.getOriginalFilename();
+            String filename = VideoToM3u8AndTSUtil.getFilenameWithoutSuffix(Objects.requireNonNull(file.getOriginalFilename()));
+            String destPathname = "E:/Type Files/Videos/Captures/m3u8s/" + filename + ".m3u8";
+
+            boolean converted = VideoToM3u8AndTSUtil.convert(srcPathname, destPathname);
+            if (!converted) {
+                return ResponseEntity.notFound().build();
+            }
+
+            return ResponseEntity.ok("http://localhost:8080/video/m3u8?filepath=E:/Type Files/Videos/Captures/m3u8s&filename=" + filename + ".m3u8");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -47,8 +57,8 @@ public class VideoController {
     @GetMapping("/m3u8")
     public ResponseEntity<byte[]> getM3U8Content(@RequestParam String filepath, @RequestParam String filename) {
         try {
-            // 从classpath中读取M3U8文件内容
             File file = new File(filepath, filename);
+
             if (file.exists()) {
                 // 读取M3U8文件内容
                 FileInputStream fileInputStream = new FileInputStream(file);
@@ -64,7 +74,6 @@ public class VideoController {
                 return ResponseEntity.notFound().build();
             }
         } catch (IOException e) {
-            // 处理文件读取异常
             e.fillInStackTrace();
             return ResponseEntity.notFound().build();
         }
@@ -90,7 +99,6 @@ public class VideoController {
                 return ResponseEntity.notFound().build();
             }
         } catch (IOException e) {
-            // 处理文件读取异常
             e.fillInStackTrace();
             return null;
         }

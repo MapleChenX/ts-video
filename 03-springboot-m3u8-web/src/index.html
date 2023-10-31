@@ -7,16 +7,16 @@
     <title>Document</title>
   </head>
   <body>
-    <video id="video" controls></video>
+    <video style="width: 800px; height: 500;" id="video" controls></video>
     <script>
-      var video = document.getElementById("video");
-      var videoSrc =
+      const video = document.getElementById("video");
+      const videoSrc =
         "http://localhost:8080/video/m3u8?filepath=E:/Type Files/Videos/Captures/m3u8s&filename=视频.m3u8";
 
       if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = videoSrc;
       } else if (Hls.isSupported()) {
-        var hls = new Hls();
+        const hls = new Hls();
         hls.loadSource(videoSrc);
         hls.attachMedia(video);
       }

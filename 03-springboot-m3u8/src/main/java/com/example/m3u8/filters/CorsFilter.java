@@ -1,4 +1,4 @@
-package com.example.m3u8;
+package com.example.m3u8.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
