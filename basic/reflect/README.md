@@ -2,6 +2,4 @@
 
 通过反射，我们可以做很多事情，拿到注解的值，通过注解重新构造一个新的对象。总之，反射很灵活，可以多使用。
 
-👉关于反射的讨论博文：[通过反射机制简化 JDBC ResultSet 实体类的注入](https://www.cnblogs.com/Enziandom/p/16803036.html)
-
-👉关于反射和注解的结合使用的博文：[注解带来的好处，注解如何简化代码](https://www.cnblogs.com/Enziandom/p/16801183.html)
+👉 博文：[利用 Java 反射机制简化 JDBC ResultSet 封装实体类](https://www.cnblogs.com/himmelbleu#/p/16803036)
