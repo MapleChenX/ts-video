@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
     <title>Document</title>
-  </head>
-  <body>
-    <video style="width: 800px; height: 500px;" id="video" controls></video>
-    <script>
-      const video = document.getElementById("video");
-      const videoSrc =
+</head>
+<body>
+<video style="width: 800px; height: 500px;" id="video" controls></video>
+<script>
+    const video = document.getElementById("video");
+    const videoSrc =
         "http://localhost:8080/video/m3u8?filepath=X://Type Files/Videos/Captures/m3u8s&filename=2024-03-13 12-36-31.m3u8";
-      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = videoSrc;
-      } else if (Hls.isSupported()) {
+    } else if (Hls.isSupported()) {
         const hls = new Hls();
         hls.loadSource(videoSrc);
         hls.attachMedia(video);
-      }
-    </script>
-  </body>
+    }
+</script>
+</body>
 </html>
