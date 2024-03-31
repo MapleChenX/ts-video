@@ -21,7 +21,7 @@ public class VideoToM3u8AndTSUtil {
 
     public static boolean convert(String srcPathname, String destPathname) {
         try {
-            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", srcPathname, "-c:v", "libx264", "-hls_time", "60",
+            ProcessBuilder processBuilder = new ProcessBuilder("ffmpeg", "-i", srcPathname, "-c:v", "libx264", "-hls_time", "10",
                     "-hls_list_size", "0", "-c:a", "aac", "-strict", "-2", "-f", "hls", destPathname);
             processBuilder.redirectErrorStream(true);
 
@@ -36,6 +36,7 @@ public class VideoToM3u8AndTSUtil {
             System.out.println("FFmpeg process exited with code: " + exitCode);
             return true;
         } catch (IOException | InterruptedException e) {
+            System.out.println("shit");
             e.fillInStackTrace();
             return false;
         }
