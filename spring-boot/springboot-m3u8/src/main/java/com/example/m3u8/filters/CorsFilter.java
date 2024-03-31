@@ -11,12 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.Serializable;
 
-/**
- * @description:
- * @package: com.example.m3u8
- * @author: zheng
- * @date: 2023/10/28
- */
+
 @Component
 @Order(-102)
 public class CorsFilter extends HttpFilter implements Serializable {

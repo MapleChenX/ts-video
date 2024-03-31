@@ -2,12 +2,7 @@ package com.example.m3u8.utils;
 
 import java.io.*;
 
-/**
- * @description:
- * @package: com.example.m3u8
- * @author: zheng
- * @date: 2023/10/31
- */
+
 public class VideoToM3u8AndTSUtil {
 
     public static String getFilenameWithoutSuffix(String filename) {

@@ -15,12 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-/**
- * @description:
- * @package: com.example.m3u8
- * @author: zheng
- * @date: 2023/10/28
- */
+
 @RestController
 @RequestMapping("/video")
 public class VideoController {
